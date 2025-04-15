@@ -1,9 +1,10 @@
 import SwiftUI
+import Dashboard
 
 struct TabBarView: View {
     
     enum Tab {
-        case home(HomeViewModel)
+        case home(DashboardCoordinator)
         case explore
         case saved
         case profile
@@ -19,8 +20,9 @@ struct TabBarView: View {
         TabView {
             ForEach(tabs.indices, id: \.self) { index in
                 switch tabs[index] {
-                case .home(let viewModel):
-                    HomeView(viewModel: viewModel).tabItem { Label("Home", systemImage: "house") }
+                case .home(let coordinator):
+                    DashboardView(coordinator: coordinator)
+                        .tabItem { Label("Home", systemImage: "house") }
                 case .explore:
                     Color.green.tabItem { Label("Home", systemImage: "house") }
                 case .saved:
@@ -30,22 +32,5 @@ struct TabBarView: View {
                 }
             }
         }
-    }
-}
-
-final class HomeViewModel {
-    
-}
-
-struct HomeView: View {
-    
-    private let viewModel: HomeViewModel
-    
-    init(viewModel: HomeViewModel) {
-        self.viewModel = viewModel
-    }
-    
-    var body: some View {
-        Color.red
     }
 }

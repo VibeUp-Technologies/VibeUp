@@ -1,5 +1,6 @@
 import SwiftUI
 import FlowStacks
+import Dashboard
 
 struct AppCoordinatorView: View {
     
@@ -31,7 +32,7 @@ private final class TabFactrory {
     
     func makeTabs() -> [TabBarView.Tab] {
         [
-            .home(viewModelFactory.makeHomeViewModel()),
+            .home(viewModelFactory.makeDashboardCoordinator()),
             .explore,
             .saved,
             .profile
@@ -41,8 +42,8 @@ private final class TabFactrory {
 
 private final class ViewModelFactory {
     
-    func makeHomeViewModel() -> HomeViewModel {
-        HomeViewModel()
+    func makeDashboardCoordinator() -> DashboardCoordinator {
+        DashboardCoordinator()
     }
 }
 

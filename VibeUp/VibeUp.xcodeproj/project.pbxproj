@@ -8,10 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		102ED7DF2DAC2BD100724940 /* FlowStacks in Frameworks */ = {isa = PBXBuildFile; productRef = 102ED7DE2DAC2BD100724940 /* FlowStacks */; };
+		10E014502DAD9785002B6CEC /* Dashboard in Frameworks */ = {isa = PBXBuildFile; productRef = 10E0144F2DAD9785002B6CEC /* Dashboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1094CF9A2DAEB37A000233BF /* Formatter */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Formatter; sourceTree = "<group>"; };
+		1094CF9B2DAEB37A000233BF /* Logger */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Logger; sourceTree = "<group>"; };
+		1094CF9C2DAEB37A000233BF /* Validator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Validator; sourceTree = "<group>"; };
 		109CC89F2DAC24420009F041 /* VibeUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VibeUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		10E0144D2DAD9754002B6CEC /* Dashboard */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Dashboard; sourceTree = "<group>"; };
+		10E014512DAD99C0002B6CEC /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = DesignSystem; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -28,6 +34,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				102ED7DF2DAC2BD100724940 /* FlowStacks in Frameworks */,
+				10E014502DAD9785002B6CEC /* Dashboard in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,8 +44,21 @@
 		102ED7E02DAC2BED00724940 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				1094CF992DAEB322000233BF /* Utility */,
+				10E014512DAD99C0002B6CEC /* DesignSystem */,
+				10E0144D2DAD9754002B6CEC /* Dashboard */,
 			);
 			path = Packages;
+			sourceTree = "<group>";
+		};
+		1094CF992DAEB322000233BF /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				1094CF9A2DAEB37A000233BF /* Formatter */,
+				1094CF9B2DAEB37A000233BF /* Logger */,
+				1094CF9C2DAEB37A000233BF /* Validator */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		109CC8962DAC24420009F041 = {
@@ -46,6 +66,7 @@
 			children = (
 				109CC8A12DAC24420009F041 /* VibeUp */,
 				102ED7E02DAC2BED00724940 /* Packages */,
+				10E0144E2DAD9785002B6CEC /* Frameworks */,
 				109CC8A02DAC24420009F041 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +77,13 @@
 				109CC89F2DAC24420009F041 /* VibeUp.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		10E0144E2DAD9785002B6CEC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -79,6 +107,7 @@
 			name = VibeUp;
 			packageProductDependencies = (
 				102ED7DE2DAC2BD100724940 /* FlowStacks */,
+				10E0144F2DAD9785002B6CEC /* Dashboard */,
 			);
 			productName = VibeUp;
 			productReference = 109CC89F2DAC24420009F041 /* VibeUp.app */;
@@ -371,6 +400,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 102ED7DD2DAC2BD100724940 /* XCRemoteSwiftPackageReference "FlowStacks" */;
 			productName = FlowStacks;
+		};
+		10E0144F2DAD9785002B6CEC /* Dashboard */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Dashboard;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
