@@ -7,6 +7,6 @@ enum Screen: Hashable {
 
 final class AppCoordinator: ObservableObject {
     
-    @Published var routes: [Route<Screen>] = [.cover(.dashboard)]
+    @Published var routes: [Route<Screen>] = []
     
 }

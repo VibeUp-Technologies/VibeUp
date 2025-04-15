@@ -20,7 +20,7 @@ private extension BackgroundGradientView {
     var gradinet: Gradient {
         Gradient(
             colors: [
-                Color(.mediumSlateBlue).opacity(0.5),
+                Color(.mediumSlateBlue).opacity(0.25),
                 .white,
                 .white
             ]

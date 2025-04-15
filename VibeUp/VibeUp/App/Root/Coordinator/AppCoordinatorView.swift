@@ -14,15 +14,7 @@ struct AppCoordinatorView: View {
     }
     
     var body: some View {
-        FlowStack($appCoordinator.routes, withNavigation: true) {
-            LaunchView()
-                .flowDestination(for: Screen.self) { screen in
-                    switch screen {
-                    case .dashboard:
-                        TabBarView(tabs: tabFactory.makeTabs())
-                    }
-                }
-        }
+        TabBarView(tabs: tabFactory.makeTabs())
     }
 }
 

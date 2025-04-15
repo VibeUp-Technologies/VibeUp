@@ -21,7 +21,7 @@ struct TabBarView: View {
             ForEach(tabs.indices, id: \.self) { index in
                 switch tabs[index] {
                 case .home(let coordinator):
-                    DashboardView(coordinator: coordinator)
+                    DashboardCoordinatorView(coordinator: coordinator)
                         .tabItem { Label("Home", systemImage: "house") }
                 case .explore:
                     Color.green.tabItem { Label("Home", systemImage: "house") }

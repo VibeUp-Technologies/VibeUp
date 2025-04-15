@@ -15,18 +15,13 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(path: "DesignSystem"),
-        .package(
-            url: "https://github.com/johnpatrickmorgan/FlowStacks.git",
-            .upToNextMajor(from: "0.8.3")
-        )
+        .package(path: "DesignSystem")
     ],
     targets: [
         .target(
             name: "Dashboard",
             dependencies: [
-                "DesignSystem",
-                "FlowStacks"
+                "DesignSystem"
             ]
         )
     ]

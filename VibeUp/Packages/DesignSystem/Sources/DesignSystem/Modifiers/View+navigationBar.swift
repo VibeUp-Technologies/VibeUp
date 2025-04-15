@@ -2,21 +2,23 @@ import SwiftUI
 
 public extension View {
     
-    func navigationBar() -> some View {
-        NavigationStack {
-            self.toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button("Leading") {
-                        // Button Action
-                    }
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Trailing") {
-                        // Button Action
-                    }
-                }
+    func navigationBar(configuration: NavigationBarConfiguration) -> some View {
+        modifier(NavigationBarModifier(configuration: configuration))
+    }
+}
+
+private struct NavigationBarModifier: ViewModifier {
+    
+    let configuration: NavigationBarConfiguration
+
+    func body(content: Content) -> some View {
+        content
+            .toolbar {
+                NavigationBar(configuration: configuration)
             }
-            .toolbarBackground(.hidden)
-        }
+            .toolbarBackground(
+                configuration.isBackgroundHidden ? .hidden : .visible,
+                for: .navigationBar
+            )
     }
 }
