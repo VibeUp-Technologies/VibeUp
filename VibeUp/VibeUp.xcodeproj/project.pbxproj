@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		102ED7DF2DAC2BD100724940 /* FlowStacks in Frameworks */ = {isa = PBXBuildFile; productRef = 102ED7DE2DAC2BD100724940 /* FlowStacks */; };
+		1094D02B2DAEF3BD000233BF /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 1094D02A2DAEF3BD000233BF /* DesignSystem */; };
 		10E014502DAD9785002B6CEC /* Dashboard in Frameworks */ = {isa = PBXBuildFile; productRef = 10E0144F2DAD9785002B6CEC /* Dashboard */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1094D02B2DAEF3BD000233BF /* DesignSystem in Frameworks */,
 				102ED7DF2DAC2BD100724940 /* FlowStacks in Frameworks */,
 				10E014502DAD9785002B6CEC /* Dashboard in Frameworks */,
 			);
@@ -108,6 +110,7 @@
 			packageProductDependencies = (
 				102ED7DE2DAC2BD100724940 /* FlowStacks */,
 				10E0144F2DAD9785002B6CEC /* Dashboard */,
+				1094D02A2DAEF3BD000233BF /* DesignSystem */,
 			);
 			productName = VibeUp;
 			productReference = 109CC89F2DAC24420009F041 /* VibeUp.app */;
@@ -400,6 +403,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 102ED7DD2DAC2BD100724940 /* XCRemoteSwiftPackageReference "FlowStacks" */;
 			productName = FlowStacks;
+		};
+		1094D02A2DAEF3BD000233BF /* DesignSystem */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DesignSystem;
 		};
 		10E0144F2DAD9785002B6CEC /* Dashboard */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -12,8 +12,6 @@ public struct DashboardCoordinatorView: View {
     }
     
     public var body: some View {
-        NavigationStack {
-            HomeView(viewModel: coordinator.viewModelFactory.makeHomeViewModel())
-        }
+        HomeView(viewModel: coordinator.viewModelFactory.makeHomeViewModel())
     }
 }

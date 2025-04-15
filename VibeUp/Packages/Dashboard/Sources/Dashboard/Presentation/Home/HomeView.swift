@@ -12,34 +12,42 @@ public struct HomeView: View {
     
     public var body: some View {
         ZStack(alignment: .top) {
-            BackgroundGradientView()
-                .ignoresSafeArea()
-            
-            VStack(alignment: .leading, spacing: Spacing.padding_2) {
-                headerText
-                
-                ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack(spacing: 16.0) {
-                        Color.red.frame(width: 100.0)
-                        Color.red.frame(width: 100.0)
-                        Color.red.frame(width: 100.0)
-                        Color.red.frame(width: 100.0)
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: Spacing.padding_2) {
+                    headerText
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        LazyHStack(spacing: 16.0) {
+                            Color.red.frame(width: 100.0)
+                            Color.red.frame(width: 100.0)
+                            Color.red.frame(width: 100.0)
+                            Color.red.frame(width: 100.0)
+                        }
+                        .padding(.leading, 16.0)
                     }
                     .frame(height: 80.0)
-                    .padding(.leading, 16.0)
+                    
+                    LazyVStack(spacing: 16.0) {
+                        Color.red.frame(height: 300.0)
+                        Color.red.frame(height: 300.0)
+                        Color.red.frame(height: 300.0)
+                        Color.red.frame(height: 300.0)
+                    }
+                    .padding(.horizontal, 16.0)
+                    
+                    Spacer()
                 }
-                Spacer()
+                .padding(.top, Spacing.padding_2)
             }
-            .padding(.top, Spacing.padding_2)
         }
-        .navigationBar(
-            configuration: .init(
-                leadingItems: [
-                    .button(BackNavigationBarItemButton(action: { }))
-                ],
-                isBackgroundHidden: true
-            )
-        )
+//        .navigationBar(
+//            configuration: .init(
+//                leadingItems: [
+//                    .button(BackNavigationBarItemButton(action: { }))
+//                ],
+//                isBackgroundHidden: true
+//            )
+//        )
     }
 }
 
