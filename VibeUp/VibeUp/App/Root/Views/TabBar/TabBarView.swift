@@ -13,10 +13,6 @@ struct TabBarView: View {
     
     private let tabs: [Tab]
     
-    private let columns = [
-        GridItem(.adaptive(minimum: 80.0))
-    ]
-    
     @State private var selectedIndex: Int = 0
     
     init(tabs: [Tab]) {
@@ -30,7 +26,7 @@ struct TabBarView: View {
             
             VStack(spacing: .zero) {
                 PageView(selectedIndex: $selectedIndex, pages: pages)
-                    .padding(.bottom, -Spacing.padding_2)
+                    .padding(.bottom, -Constants.tabBarHeight * 0.5)
                 
                 tabBarView
             }
@@ -44,48 +40,43 @@ private extension TabBarView {
     
     var tabBarView: some View {
         ZStack {
-            Color.yellow
-                .frame(height: 64)
-                .cornerRadius(32.0)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 32.0)
-                        .stroke(.gray, lineWidth: 1)
-                )
+            Color.white
+                .frame(height: Constants.tabBarHeight)
+                .cornerRadius(Constants.tabBarHeight * 0.5)
+                .shadow(radius: Constants.shadowRadious)
             
-            LazyVGrid(columns: columns, spacing: 20) {
+            HStack(spacing: Spacing.padding_1) {
                 ForEach(tabs.indices, id: \.self) { index in
-                    VStack(spacing: Spacing.padding_1) {
-                        Button(
-                            action: {
-                                selectedIndex = index
-                            },
-                            label: {
-                                HStack(spacing: Spacing.padding_0_5) {
-                                    Image(systemName: "house")
-                                    
+                    Button(
+                        action: {
+                            selectedIndex = index
+                        },
+                        label: {
+                            HStack(spacing: Spacing.padding_0_5) {
+                                Image(systemName: "house")
+                                
+                                if selectedIndex == index {
+                                    SFProText(text: "Home", style: .sapphire, size: 16.0, isBold: true)
+                                }
+                            }
+                            .background(
+                                Group {
                                     if selectedIndex == index {
-                                        SFProText(text: "Home", style: .sapphire)
+                                        Color.red
+                                            .cornerRadius(Spacing.padding_2)
+                                            .padding(-Spacing.padding_1)
                                     }
                                 }
-                                .background(
-                                    Group {
-                                        if selectedIndex == index {
-                                            Color.red
-                                                .cornerRadius(Spacing.padding_2)
-                                                .padding(-Spacing.padding_1)
-                                        }
-                                    }
-                                )
-                                .animation(.easeInOut(duration: 0.3), value: selectedIndex)
-                            }
-                        )
-                        
-                    }
+                            )
+                        }
+                    )
+                    .frame(maxWidth: .infinity)
+                    .animation(.easeInOut(duration: Constants.animationDuration), value: selectedIndex)
                 }
             }
             .padding(.horizontal, Spacing.padding_2)
         }
-        .padding(.horizontal, Spacing.padding_1_5)
+        .padding(.horizontal, Spacing.padding_2)
     }
     
     var pages: [AnyView] {
@@ -104,5 +95,16 @@ private extension TabBarView {
         case .profile:
             Color.yellow
         }
+    }
+}
+
+// MARK: - Constants
+
+private extension TabBarView {
+    
+    enum Constants {
+        static let shadowRadious: CGFloat = 6.0
+        static let tabBarHeight: CGFloat = 72.0
+        static let animationDuration: TimeInterval = 0.3
     }
 }

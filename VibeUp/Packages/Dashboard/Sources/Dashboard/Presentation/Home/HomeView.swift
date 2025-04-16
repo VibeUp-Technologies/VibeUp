@@ -21,19 +21,19 @@ struct HomeView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 16.0) {
                         Color.red.frame(width: 100.0).onTapGesture(perform: viewModel.onTest)
-                        Color.red.frame(width: 100.0)
-                        Color.red.frame(width: 100.0)
-                        Color.red.frame(width: 100.0)
+                        Color.red.frame(width: 100.0).onTapGesture(perform: viewModel.onTest)
+                        Color.red.frame(width: 100.0).onTapGesture(perform: viewModel.onTest)
+                        Color.red.frame(width: 100.0).onTapGesture(perform: viewModel.onTest)
                     }
                     .padding(.leading, 16.0)
                 }
                 .frame(height: 80.0)
                 
                 LazyVStack(spacing: 16.0) {
-                    Color.red.frame(height: 300.0)
-                    Color.red.frame(height: 300.0)
-                    Color.red.frame(height: 300.0)
-                    Color.red.frame(height: 300.0)
+                    Color.red.frame(height: 300.0).onTapGesture(perform: viewModel.onTest)
+                    Color.red.frame(height: 300.0).onTapGesture(perform: viewModel.onTest)
+                    Color.red.frame(height: 300.0).onTapGesture(perform: viewModel.onTest)
+                    Color.red.frame(height: 300.0).onTapGesture(perform: viewModel.onTest)
                 }
                 .padding(.horizontal, 16.0)
                 
