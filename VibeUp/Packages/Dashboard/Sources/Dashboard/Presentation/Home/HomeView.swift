@@ -14,17 +14,32 @@ struct HomeView: View {
     }
     
     public var body: some View {
-        MemoryScrollView(
-            scrollPosition: $nearToYouSrollPosition,
-            axis: .vertical,
-            items: (0..<10).map { index in
-                ZStack {
-                    Color.red
-                    Text("\(index)")
+        ScrollView(showsIndicators: false) {
+            VStack(alignment: .leading, spacing: Spacing.padding_2) {
+                headerText
+                
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack(spacing: 16.0) {
+                        Color.red.frame(width: 100.0).onTapGesture(perform: viewModel.onTest)
+                        Color.red.frame(width: 100.0)
+                        Color.red.frame(width: 100.0)
+                        Color.red.frame(width: 100.0)
+                    }
+                    .padding(.leading, 16.0)
                 }
-                .frame(height: 300.0)
+                .frame(height: 80.0)
+                
+                LazyVStack(spacing: 16.0) {
+                    Color.red.frame(height: 300.0)
+                    Color.red.frame(height: 300.0)
+                    Color.red.frame(height: 300.0)
+                    Color.red.frame(height: 300.0)
+                }
+                .padding(.horizontal, 16.0)
+                
+                Spacer()
             }
-        )
+        }
     }
 }
 

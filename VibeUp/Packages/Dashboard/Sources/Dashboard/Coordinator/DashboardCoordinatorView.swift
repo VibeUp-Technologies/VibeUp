@@ -21,7 +21,7 @@ public struct DashboardCoordinatorView: View {
                             .navigationBar(
                                 configuration: .init(
                                     leadingItems: [
-                                        .button(BackNavigationBarItemButton(action: { }))
+                                        .button(BackNavigationBarItemButton(action: { coordinator.routes.pop() }))
                                     ],
                                     isBackgroundHidden: false
                                 )
