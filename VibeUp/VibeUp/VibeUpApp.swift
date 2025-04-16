@@ -10,11 +10,11 @@ import SwiftUI
 @main
 struct VibeUpApp: App {
     
-    private let appCoordinator = AppCoordinator()
+    private let coordinator = AppCoordinator()
     
     var body: some Scene {
         WindowGroup {
-            AppCoordinatorView(appCoordinator: appCoordinator)
+            AppCoordinatorView(coordinator: coordinator)
         }
     }
 }

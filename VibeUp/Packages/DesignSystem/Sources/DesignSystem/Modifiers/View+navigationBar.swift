@@ -20,5 +20,6 @@ private struct NavigationBarModifier: ViewModifier {
                 configuration.isBackgroundHidden ? .hidden : .visible,
                 for: .navigationBar
             )
+            .navigationBarBackButtonHidden(true)
     }
 }

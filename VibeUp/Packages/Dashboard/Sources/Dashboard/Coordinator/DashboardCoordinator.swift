@@ -1,15 +1,29 @@
 import Foundation
+import FlowStacks
+
+enum Screen: Hashable {
+    case test
+}
 
 public final class DashboardCoordinator: ObservableObject {
     
-    let viewModelFactory = ViewModelFactory()
+    @Published var routes: [Route<Screen>] = []
     
     public init() { }
 }
 
-final class ViewModelFactory {
+extension DashboardCoordinator {
     
     func makeHomeViewModel() -> HomeViewModel {
-        HomeViewModel()
+        HomeViewModel(
+            onEvent: { [weak self] event in
+                guard let self else { return }
+                
+                switch event {
+                case .test:
+                    routes.push(.test)
+                }
+            }
+        )
     }
 }

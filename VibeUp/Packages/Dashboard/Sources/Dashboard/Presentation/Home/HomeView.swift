@@ -1,53 +1,30 @@
 import SwiftUI
 import DesignSystem
 
-public struct HomeView: View {
+struct HomeView: View {
+    
+    @State private var categoriesSrollPosition: Int?
+    @State private var nearToYouSrollPosition: Int?
     
     @ObservedObject
     private var viewModel: HomeViewModel
     
-    public init(viewModel: HomeViewModel) {
+    init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
     }
     
     public var body: some View {
-        ZStack(alignment: .top) {
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: Spacing.padding_2) {
-                    headerText
-                    
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        LazyHStack(spacing: 16.0) {
-                            Color.red.frame(width: 100.0)
-                            Color.red.frame(width: 100.0)
-                            Color.red.frame(width: 100.0)
-                            Color.red.frame(width: 100.0)
-                        }
-                        .padding(.leading, 16.0)
-                    }
-                    .frame(height: 80.0)
-                    
-                    LazyVStack(spacing: 16.0) {
-                        Color.red.frame(height: 300.0)
-                        Color.red.frame(height: 300.0)
-                        Color.red.frame(height: 300.0)
-                        Color.red.frame(height: 300.0)
-                    }
-                    .padding(.horizontal, 16.0)
-                    
-                    Spacer()
+        MemoryScrollView(
+            scrollPosition: $nearToYouSrollPosition,
+            axis: .vertical,
+            items: (0..<10).map { index in
+                ZStack {
+                    Color.red
+                    Text("\(index)")
                 }
-                .padding(.top, Spacing.padding_2)
+                .frame(height: 300.0)
             }
-        }
-//        .navigationBar(
-//            configuration: .init(
-//                leadingItems: [
-//                    .button(BackNavigationBarItemButton(action: { }))
-//                ],
-//                isBackgroundHidden: true
-//            )
-//        )
+        )
     }
 }
 
@@ -58,7 +35,7 @@ private extension HomeView {
             welcomeText
             aroundYouText
         }
-        .padding([.top, .horizontal], Spacing.padding_2)
+        .padding(.horizontal, Spacing.padding_2)
     }
     
     var welcomeText: some View {

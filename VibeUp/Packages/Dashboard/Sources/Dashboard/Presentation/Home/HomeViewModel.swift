@@ -1,6 +1,18 @@
 import Foundation
 
-public final class HomeViewModel: ObservableObject {
+final class HomeViewModel: ObservableObject {
     
-    public init() { }
+    enum Event {
+        case test
+    }
+    
+    private let onEvent: (Event) -> Void
+    
+    init(onEvent: @escaping (Event) -> Void) {
+        self.onEvent = onEvent
+    }
+    
+    func onTest() {
+        onEvent(.test)
+    }
 }

@@ -24,11 +24,11 @@ struct TabBarView: View {
     }
     
     var body: some View {
-        VStack(spacing: Spacing.padding_0_5) {
-            ZStack(alignment: .top) {
-                BackgroundGradientView()
-                    .ignoresSafeArea()
-                
+        ZStack(alignment: .top) {
+            BackgroundGradientView()
+                .ignoresSafeArea()
+            
+            VStack(spacing: Spacing.padding_0_5) {
                 TabView(selection: $selectedTabIndex) {
                     ForEach(tabs.indices, id: \.self) { index in
                         switch tabs[index] {
@@ -46,50 +46,51 @@ struct TabBarView: View {
                 .tabViewStyle(.page(indexDisplayMode: .never))
                 .transition(.slide)
                 .animation(.easeInOut(duration: 1.0), value: selectedTabIndex)
-            }
-            ZStack {
-                Color.clear
-                    .frame(height: 64)
-                    .cornerRadius(32.0)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 32.0)
-                            .stroke(.gray, lineWidth: 1)
-                    )
                 
-                LazyVGrid(columns: columns, spacing: 20) {
-                    ForEach(tabs.indices, id: \.self) { index in
-                        VStack(spacing: Spacing.padding_1) {
-                            Button(
-                                action: {
-                                    selectedTabIndex = index
-                                },
-                                label: {
-                                    HStack(spacing: Spacing.padding_0_5) {
-                                        Image(systemName: "house")
-                                        
-                                        if selectedTabIndex == index {
-                                            SFProText(text: "Home", style: .sapphire)
-                                        }
-                                    }
-                                    .background(
-                                        Group {
+                ZStack {
+                    Color.clear
+                        .frame(height: 64)
+                        .cornerRadius(32.0)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 32.0)
+                                .stroke(.gray, lineWidth: 1)
+                        )
+                    
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(tabs.indices, id: \.self) { index in
+                            VStack(spacing: Spacing.padding_1) {
+                                Button(
+                                    action: {
+                                        selectedTabIndex = index
+                                    },
+                                    label: {
+                                        HStack(spacing: Spacing.padding_0_5) {
+                                            Image(systemName: "house")
+                                            
                                             if selectedTabIndex == index {
-                                                Color.red
-                                                    .cornerRadius(Spacing.padding_2)
-                                                    .padding(-Spacing.padding_1)
+                                                SFProText(text: "Home", style: .sapphire)
                                             }
                                         }
-                                    )
-                                    .animation(.easeInOut(duration: 0.3), value: selectedTabIndex)
-                                }
-                            )
-                            
+                                        .background(
+                                            Group {
+                                                if selectedTabIndex == index {
+                                                    Color.red
+                                                        .cornerRadius(Spacing.padding_2)
+                                                        .padding(-Spacing.padding_1)
+                                                }
+                                            }
+                                        )
+                                        .animation(.easeInOut(duration: 0.3), value: selectedTabIndex)
+                                    }
+                                )
+                                
+                            }
                         }
                     }
+                    .padding(.horizontal, Spacing.padding_2)
                 }
-                .padding(.horizontal, Spacing.padding_2)
+                .padding(.horizontal, Spacing.padding_1_5)
             }
-            .padding(.horizontal, Spacing.padding_1_5)
         }
     }
 }

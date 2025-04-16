@@ -12,6 +12,22 @@ public struct DashboardCoordinatorView: View {
     }
     
     public var body: some View {
-        HomeView(viewModel: coordinator.viewModelFactory.makeHomeViewModel())
+        FlowStack($coordinator.routes) {
+            HomeView(viewModel: coordinator.makeHomeViewModel())
+                .flowDestination(for: Screen.self) { screen in
+                    switch screen {
+                    case .test:
+                        Color.red
+                            .navigationBar(
+                                configuration: .init(
+                                    leadingItems: [
+                                        .button(BackNavigationBarItemButton(action: { }))
+                                    ],
+                                    isBackgroundHidden: false
+                                )
+                            )
+                    }
+                }
+        }
     }
 }

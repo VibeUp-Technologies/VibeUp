@@ -5,16 +5,18 @@ import Dashboard
 struct AppCoordinatorView: View {
     
     @ObservedObject
-    private var appCoordinator: AppCoordinator
+    private var coordinator: AppCoordinator
     
     private let tabFactory = TabFactrory()
     
-    init(appCoordinator: AppCoordinator) {
-        self.appCoordinator = appCoordinator
+    init(coordinator: AppCoordinator) {
+        self.coordinator = coordinator
     }
     
     var body: some View {
-        TabBarView(tabs: tabFactory.makeTabs())
+        FlowStack($coordinator.routes, withNavigation: true) {
+            TabBarView(tabs: tabFactory.makeTabs())
+        }
     }
 }
 
@@ -40,5 +42,5 @@ private final class ViewModelFactory {
 }
 
 #Preview {
-    AppCoordinatorView(appCoordinator: .preiview)
+    AppCoordinatorView(coordinator: .preiview)
 }
