@@ -19,7 +19,7 @@ struct HomeView: View {
                 headerText
                 
                 ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack(spacing: 16.0) {
+                    LazyHStack(spacing: Spacing.padding_2) {
                         CategoryCell(title: "Music", image: Resourses.Image.musicNote)
                         CategoryCell(title: "Clothing", image: Resourses.Image.bookmarkFill)
                         CategoryCell(title: "Festival", image: Resourses.Image.compassFill)
@@ -35,13 +35,13 @@ struct HomeView: View {
                         onAction: { }
                     ),
                     content: {
-                        LazyVStack(spacing: 16.0) {
-                            Color.red.frame(height: 300.0).onTapGesture(perform: viewModel.onTest)
-                            Color.red.frame(height: 300.0).onTapGesture(perform: viewModel.onTest)
-                            Color.red.frame(height: 300.0).onTapGesture(perform: viewModel.onTest)
-                            Color.red.frame(height: 300.0).onTapGesture(perform: viewModel.onTest)
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            LazyHStack(spacing: Spacing.padding_2) {
+                                UpcomingEventCell(title: "Bernadya Solo Concert", price: "Rp250k - Rp500k", location: "Mojokerto, East Jave")
+                                UpcomingEventCell(title: "Moshig Fest", price: "Rp80k - Rp250k", location: "Jombang, East Jave")
+                            }
+                            .padding(.horizontal, 16.0)
                         }
-                        .padding(.horizontal, 16.0)
                     }
                 )
                 
@@ -51,6 +51,8 @@ struct HomeView: View {
         }
     }
 }
+
+// MARK: - Private
 
 private extension HomeView {
     
