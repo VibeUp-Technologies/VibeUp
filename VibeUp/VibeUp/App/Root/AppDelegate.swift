@@ -3,11 +3,9 @@ import Firebase
 
 final class AppDelegate: NSObject, UIApplicationDelegate {
     
-    typealias LaunchOptions = [UIApplication.LaunchOptionsKey : Any]?
-    
-    private func application(
+    func application(
         _ application: UIApplication,
-        didFinishLaunchingWithOptions launchOptions: LaunchOptions? = nil
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
         configurateGoogleServices()
         

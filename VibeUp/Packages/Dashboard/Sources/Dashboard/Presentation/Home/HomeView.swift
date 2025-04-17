@@ -20,10 +20,9 @@ struct HomeView: View {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: Spacing.padding_2) {
-                        CategoryCell(title: "Music", image: Resourses.Image.musicNote)
-                        CategoryCell(title: "Clothing", image: Resourses.Image.bookmarkFill)
-                        CategoryCell(title: "Festival", image: Resourses.Image.compassFill)
-                        CategoryCell(title: "Food", image: Resourses.Image.forkKnife)
+                        ForEach(viewModel.categories.indices, id: \.self) { index in
+                            CategoryCell(title: viewModel.categories[index].name, image: Resourses.Image.musicNote)
+                        }
                     }
                     .padding(.leading, 16.0)
                 }
@@ -45,10 +44,26 @@ struct HomeView: View {
                     }
                 )
                 
-                Spacer()
+                SectionView(
+                    title: "Popular Events",
+                    trailingContent: .init(
+                        title: "See all events",
+                        onAction: { }
+                    ),
+                    content: {
+                        LazyVStack(spacing: Spacing.padding_2) {
+                            Color.black.frame(height: 220.0).cornerRadius(Spacing.padding_1_5)
+                            Color.black.frame(height: 220.0).cornerRadius(Spacing.padding_1_5)
+                            Color.black.frame(height: 220.0).cornerRadius(Spacing.padding_1_5)
+                        }
+                        .padding(.horizontal, 16.0)
+                    }
+                )
             }
             .padding(.top, Spacing.padding_3)
+            .padding(.bottom, Spacing.padding_5)
         }
+        .onFirstAppear(viewModel.onFirstAppear)
     }
 }
 

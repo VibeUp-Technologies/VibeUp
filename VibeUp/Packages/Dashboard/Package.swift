@@ -13,6 +13,10 @@ let package = Package(
             name: "Dashboard",
             targets: ["Dashboard"]
         ),
+        .library(
+            name: "DashboardTypes",
+            targets: ["Dashboard"]
+        ),
     ],
     dependencies: [
         .package(path: "DesignSystem")
@@ -21,8 +25,13 @@ let package = Package(
         .target(
             name: "Dashboard",
             dependencies: [
+                "DashboardTypes",
                 "DesignSystem"
             ]
+        ),
+        .target(
+            name: "DashboardTypes",
+            dependencies: []
         )
     ]
 )

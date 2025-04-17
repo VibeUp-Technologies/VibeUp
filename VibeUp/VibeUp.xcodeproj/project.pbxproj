@@ -15,6 +15,8 @@
 		103ABD4A2DB0111A0073D19B /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 103ABD492DB0111A0073D19B /* FirebaseFirestore */; };
 		103ABD4C2DB0111A0073D19B /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 103ABD4B2DB0111A0073D19B /* FirebaseRemoteConfig */; };
 		103ABD4E2DB0111A0073D19B /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 103ABD4D2DB0111A0073D19B /* FirebaseStorage */; };
+		103ABD572DB128B80073D19B /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 103ABD562DB128B80073D19B /* FirebaseDatabase */; };
+		103ABD5C2DB1367D0073D19B /* DashboardTypes in Frameworks */ = {isa = PBXBuildFile; productRef = 103ABD5B2DB1367D0073D19B /* DashboardTypes */; };
 		1094D02B2DAEF3BD000233BF /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 1094D02A2DAEF3BD000233BF /* DesignSystem */; };
 		10E014502DAD9785002B6CEC /* Dashboard in Frameworks */ = {isa = PBXBuildFile; productRef = 10E0144F2DAD9785002B6CEC /* Dashboard */; };
 /* End PBXBuildFile section */
@@ -48,7 +50,9 @@
 				10E014502DAD9785002B6CEC /* Dashboard in Frameworks */,
 				103ABD482DB0111A0073D19B /* FirebaseCrashlytics in Frameworks */,
 				103ABD422DB0111A0073D19B /* FirebaseAnalytics in Frameworks */,
+				103ABD5C2DB1367D0073D19B /* DashboardTypes in Frameworks */,
 				103ABD4A2DB0111A0073D19B /* FirebaseFirestore in Frameworks */,
+				103ABD572DB128B80073D19B /* FirebaseDatabase in Frameworks */,
 				103ABD462DB0111A0073D19B /* FirebaseCore in Frameworks */,
 				103ABD3F2DB010B30073D19B /* FlowStacks in Frameworks */,
 			);
@@ -132,6 +136,8 @@
 				103ABD492DB0111A0073D19B /* FirebaseFirestore */,
 				103ABD4B2DB0111A0073D19B /* FirebaseRemoteConfig */,
 				103ABD4D2DB0111A0073D19B /* FirebaseStorage */,
+				103ABD562DB128B80073D19B /* FirebaseDatabase */,
+				103ABD5B2DB1367D0073D19B /* DashboardTypes */,
 			);
 			productName = VibeUp;
 			productReference = 109CC89F2DAC24420009F041 /* VibeUp.app */;
@@ -468,6 +474,15 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 103ABD402DB0111A0073D19B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		103ABD562DB128B80073D19B /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 103ABD402DB0111A0073D19B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		103ABD5B2DB1367D0073D19B /* DashboardTypes */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DashboardTypes;
 		};
 		1094D02A2DAEF3BD000233BF /* DesignSystem */ = {
 			isa = XCSwiftPackageProductDependency;
