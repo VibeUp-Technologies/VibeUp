@@ -93,7 +93,7 @@ private extension HomeView {
                 onAction: { }
             ),
             content: {
-                LazyVStack(spacing: Spacing.padding_2) {
+                LazyVStack(spacing: Spacing.padding_1) {
                     ForEach(viewModel.popularEventViewModels, content: PopularEventCell.init)
                 }
                 .padding(.horizontal, Spacing.padding_2)

@@ -10,7 +10,7 @@ struct PopularEventCell: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: Spacing.padding_2) {
+        VStack(alignment: .leading, spacing: Spacing.padding_1) {
             HStack(spacing: Spacing.padding_2) {
                 LazyImage(url: viewModel.image)
                     .cornerRadius(Spacing.padding_1_5)

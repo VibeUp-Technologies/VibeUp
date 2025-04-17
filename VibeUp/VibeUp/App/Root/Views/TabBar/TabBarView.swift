@@ -106,8 +106,8 @@ private extension TabBarView {
             case .saved:
                 TabItemView(
                     isSelected: isSelected,
-                    image: Resourses.Image.bookmarkFill,
-                    name: "Saved",
+                    image: Resourses.Image.heartFill,
+                    name: "Favorites",
                     action: action
                 )
             case .profile:
