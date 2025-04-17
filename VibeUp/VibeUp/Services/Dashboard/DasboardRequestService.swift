@@ -14,7 +14,7 @@ final class DasboardRequestService {
 
 extension DasboardRequestService: DashboardRequestServicing {
     
-    func fetchCategories() -> AnyPublisher<[Category], Error> {
-        firestoreService.fetchCategories()
+    func fetchCategories() -> AnyPublisher<[DashboardCategory], Error> {
+        firestoreService.fetch(with: GETCategoriesRequest())
     }
 }

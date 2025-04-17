@@ -21,7 +21,7 @@ final class HomeViewModel: ObservableObject {
         case test
     }
     
-    @Published private(set) var categories: [DashboardTypes.Category] = []
+    @Published private(set) var categories: [DashboardCategory] = []
     
     private let requestService: DashboardRequestServicing
     private let onEvent: (Event) -> Void

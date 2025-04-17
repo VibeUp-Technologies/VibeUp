@@ -3,11 +3,21 @@ import Combine
 import DashboardTypes
 import FirebaseFirestore
 
-protocol FirestoreServicing {
-    func fetchCategories() -> AnyPublisher<[DashboardTypes.Category], Error>
+protocol FirestoreData {
+    
+    init(dictinary: [String: Any])
 }
 
-final class FirestoreService: FirestoreServicing {
+protocol FirestoreRequest {
+    
+    var path: String { get }
+}
+
+protocol FirestoreServicing {
+    func fetch<Data: FirestoreData>(with request: FirestoreRequest) -> AnyPublisher<[Data], Error>
+}
+
+final class FirestoreService {
     
     private lazy var firestore = Firestore.firestore()
     
@@ -18,10 +28,15 @@ final class FirestoreService: FirestoreServicing {
     deinit {
         print("💥 FirebaseService deinitialized")
     }
-    
-    func fetchCategories() -> AnyPublisher<[DashboardTypes.Category], Error> {
-        Future<[DashboardTypes.Category], Error> { [unowned self] promise in
-            firestore.collection("categories").getDocuments() { (snapshot, error) in
+}
+
+// MARK: - FirestoreServicing
+
+extension FirestoreService: FirestoreServicing {
+ 
+    func fetch<Data: FirestoreData>(with request: FirestoreRequest) -> AnyPublisher<[Data], Error> {
+        Future { [unowned self] promise in
+            firestore.collection(request.path).getDocuments() { snapshot, error in
                 if let error = error {
                     print("💥 Error fetching categories: \(error)")
                     return
@@ -32,7 +47,7 @@ final class FirestoreService: FirestoreServicing {
                     return
                 }
                 
-                promise(.success(snapshot.documents.map { Category(dictinary: $0.data()) }))
+                promise(.success(snapshot.documents.map { .init(dictinary: $0.data()) }))
             }
         }
         .eraseToAnyPublisher()
