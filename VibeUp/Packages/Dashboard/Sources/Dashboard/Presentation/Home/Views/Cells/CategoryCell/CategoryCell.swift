@@ -29,6 +29,6 @@ struct CategoryCell: View {
             .padding(.horizontal, Spacing.padding_2)
             .padding(.vertical, Spacing.padding_1_5)
         }
-        .frame(width: 100.0)
+        .frame(minWidth: 100.0)
     }
 }

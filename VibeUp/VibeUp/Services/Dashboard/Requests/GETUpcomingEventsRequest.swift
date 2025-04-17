@@ -1,4 +1,5 @@
 import Foundation
+import FirebaseCore
 import DashboardTypes
 
 struct GETUpcomingEventsRequest: FirestoreRequest {
@@ -11,7 +12,7 @@ extension DashboardUpcomingEvent: FirestoreData {
     init?(id: String, data: [String: Any]) {
         self.init(
             id: id,
-            date: data["date"] as? Date ?? Date(),
+            date: (data["date"] as? Timestamp)?.dateValue() ?? Date(),
             image: data["image"] as? String ?? "",
             location: data["location"] as? String ?? "",
             name: data["name"] as? String ?? "",
