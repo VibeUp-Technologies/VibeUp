@@ -3,6 +3,7 @@ import SwiftUI
 public struct SFProText: View {
     
     public enum Style {
+        case `default`
         case sapphire
         case mediumSlateBlue
     }
@@ -14,7 +15,7 @@ public struct SFProText: View {
     
     public init(
         text: String,
-        style: Style,
+        style: Style = .default,
         size: CGFloat = 12.0,
         isBold: Bool = false
     ) {
@@ -28,7 +29,7 @@ public struct SFProText: View {
         Text(text)
             .bold(isBold)
             .font(.system(size: size))
-            .foregroundColor(style.color)
+            .foregroundStyle(style.color)
     }
 }
 
@@ -38,10 +39,12 @@ private extension SFProText.Style {
     
     var color: Color {
         switch self {
+        case .default:
+            .white
         case .sapphire:
-            Color(.sapphire)
+            Resourses.Colors.sapphire
         case .mediumSlateBlue:
-            Color(.mediumSlateBlue)
+            Resourses.Colors.mediumSlateBlue
         }
     }
 }
