@@ -18,11 +18,13 @@
 		103ABD572DB128B80073D19B /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 103ABD562DB128B80073D19B /* FirebaseDatabase */; };
 		103ABD5C2DB1367D0073D19B /* DashboardTypes in Frameworks */ = {isa = PBXBuildFile; productRef = 103ABD5B2DB1367D0073D19B /* DashboardTypes */; };
 		103FD6202DB15A2C00750FEE /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 103FD61F2DB15A2C00750FEE /* SDWebImageSwiftUI */; };
+		103FD6232DB190CE00750FEE /* Explore in Frameworks */ = {isa = PBXBuildFile; productRef = 103FD6222DB190CE00750FEE /* Explore */; };
 		1094D02B2DAEF3BD000233BF /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 1094D02A2DAEF3BD000233BF /* DesignSystem */; };
 		10E014502DAD9785002B6CEC /* Dashboard in Frameworks */ = {isa = PBXBuildFile; productRef = 10E0144F2DAD9785002B6CEC /* Dashboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		103FD6212DB190A000750FEE /* Explore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Explore; sourceTree = "<group>"; };
 		1094CF9A2DAEB37A000233BF /* Formatter */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Formatter; sourceTree = "<group>"; };
 		1094CF9B2DAEB37A000233BF /* Logger */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Logger; sourceTree = "<group>"; };
 		1094CF9C2DAEB37A000233BF /* Validator */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Validator; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 				103ABD5C2DB1367D0073D19B /* DashboardTypes in Frameworks */,
 				103FD6202DB15A2C00750FEE /* SDWebImageSwiftUI in Frameworks */,
 				103ABD4A2DB0111A0073D19B /* FirebaseFirestore in Frameworks */,
+				103FD6232DB190CE00750FEE /* Explore in Frameworks */,
 				103ABD572DB128B80073D19B /* FirebaseDatabase in Frameworks */,
 				103ABD462DB0111A0073D19B /* FirebaseCore in Frameworks */,
 				103ABD3F2DB010B30073D19B /* FlowStacks in Frameworks */,
@@ -69,6 +72,7 @@
 				1094CF992DAEB322000233BF /* Utility */,
 				10E014512DAD99C0002B6CEC /* DesignSystem */,
 				10E0144D2DAD9754002B6CEC /* Dashboard */,
+				103FD6212DB190A000750FEE /* Explore */,
 			);
 			path = Packages;
 			sourceTree = "<group>";
@@ -141,6 +145,7 @@
 				103ABD562DB128B80073D19B /* FirebaseDatabase */,
 				103ABD5B2DB1367D0073D19B /* DashboardTypes */,
 				103FD61F2DB15A2C00750FEE /* SDWebImageSwiftUI */,
+				103FD6222DB190CE00750FEE /* Explore */,
 			);
 			productName = VibeUp;
 			productReference = 109CC89F2DAC24420009F041 /* VibeUp.app */;
@@ -500,6 +505,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 103FD61E2DB15A2C00750FEE /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
+		};
+		103FD6222DB190CE00750FEE /* Explore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Explore;
 		};
 		1094D02A2DAEF3BD000233BF /* DesignSystem */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -1,12 +1,13 @@
 import SwiftUI
 import DesignSystem
 import Dashboard
+import Explore
 
 struct TabBarView: View {
     
     enum Tab {
         case home(DashboardCoordinator)
-        case explore
+        case explore(ExploreCoordinator)
         case saved
         case profile
     }
@@ -77,8 +78,8 @@ private extension TabBarView {
             switch tab {
             case .home(let coordinator):
                 DashboardCoordinatorView(coordinator: coordinator)
-            case .explore:
-                Color.green
+            case .explore(let coordinator):
+                ExploreCoordinatorView(coordinator: coordinator)
             case .saved:
                 Color.blue
             case .profile:

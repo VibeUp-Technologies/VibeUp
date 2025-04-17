@@ -1,6 +1,7 @@
 import Foundation
 import FlowStacks
 import Dashboard
+import Explore
 
 enum Screen: Hashable {
     case dashboard
@@ -13,7 +14,7 @@ final class AppCoordinator: ObservableObject {
     lazy var tabs: [TabBarView.Tab] = {
         [
             .home(makeDashboardCoordinator()),
-            .explore,
+            .explore(makeExploreCoordinator()),
             .saved,
             .profile
         ]
@@ -32,5 +33,9 @@ private extension AppCoordinator {
                 )
             )
         )
+    }
+    
+    func makeExploreCoordinator() -> ExploreCoordinator {
+        ExploreCoordinator(dependency: .init(services: .init()))
     }
 }
