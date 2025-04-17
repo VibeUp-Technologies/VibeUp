@@ -20,14 +20,13 @@ struct HomeView: View {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 16.0) {
-                        Color.red.frame(width: 100.0).onTapGesture(perform: viewModel.onTest)
-                        Color.red.frame(width: 100.0).onTapGesture(perform: viewModel.onTest)
-                        Color.red.frame(width: 100.0).onTapGesture(perform: viewModel.onTest)
-                        Color.red.frame(width: 100.0).onTapGesture(perform: viewModel.onTest)
+                        CategoryCell(title: "Music", image: Resourses.Image.musicNote)
+                        CategoryCell(title: "Clothing", image: Resourses.Image.bookmarkFill)
+                        CategoryCell(title: "Festival", image: Resourses.Image.compassFill)
+                        CategoryCell(title: "Food", image: Resourses.Image.forkKnife)
                     }
                     .padding(.leading, 16.0)
                 }
-                .frame(height: 80.0)
                 
                 SectionView(
                     title: "Upcoming Events",
@@ -48,6 +47,7 @@ struct HomeView: View {
                 
                 Spacer()
             }
+            .padding(.top, Spacing.padding_3)
         }
     }
 }

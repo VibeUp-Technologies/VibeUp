@@ -31,7 +31,7 @@ public struct SectionView<Content: View>: View {
     }
     
     public var body: some View {
-        VStack(alignment: .leading, spacing: Spacing.padding_1) {
+        VStack(alignment: .leading, spacing: Spacing.padding_2) {
             HStack(spacing: .zero) {
                 SFProText(text: title, style: .sapphire, size: 22.0, isBold: true)
                 Spacer()

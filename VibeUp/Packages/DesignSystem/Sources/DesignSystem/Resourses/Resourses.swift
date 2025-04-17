@@ -14,5 +14,7 @@ public enum Resourses {
         public static let compassFill = SwiftUI.Image(systemName: "safari.fill")
         public static let bookmarkFill = SwiftUI.Image(systemName: "bookmark.fill")
         public static let profileFill = SwiftUI.Image(systemName: "person.crop.circle.fill")
+        public static let musicNote = SwiftUI.Image(systemName: "music.note")
+        public static let forkKnife = SwiftUI.Image(systemName: "fork.knife")
     }
 }
