@@ -13,7 +13,7 @@ public struct ExploreCoordinatorView: View {
     
     public var body: some View {
         FlowStack($coordinator.routes) {
-            Color.blue
+            MapView()
         }
     }
 }
