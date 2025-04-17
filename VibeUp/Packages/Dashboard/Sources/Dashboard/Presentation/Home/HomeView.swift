@@ -17,48 +17,12 @@ struct HomeView: View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .leading, spacing: Spacing.padding_2) {
                 headerText
-                
-                ScrollView(.horizontal, showsIndicators: false) {
-                    LazyHStack(spacing: Spacing.padding_2) {
-                        ForEach(viewModel.categoryViewModels, content: CategoryCell.init)
-                    }
-                    .padding(.horizontal, Spacing.padding_2)
-                }
-                
-                SectionView(
-                    title: "Upcoming Events",
-                    trailingContent: .init(
-                        title: "See all events",
-                        onAction: { }
-                    ),
-                    content: {
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            LazyHStack(spacing: Spacing.padding_2) {
-                                ForEach(viewModel.upcomingEventViewModels, content: UpcomingEventCell.init)
-                            }
-                            .padding(.horizontal, Spacing.padding_2)
-                        }
-                    }
-                )
-                
-                SectionView(
-                    title: "Popular Events",
-                    trailingContent: .init(
-                        title: "See all events",
-                        onAction: { }
-                    ),
-                    content: {
-                        LazyVStack(spacing: Spacing.padding_2) {
-                            Color.black.frame(height: 220.0).cornerRadius(Spacing.padding_1_5)
-                            Color.black.frame(height: 220.0).cornerRadius(Spacing.padding_1_5)
-                            Color.black.frame(height: 220.0).cornerRadius(Spacing.padding_1_5)
-                        }
-                        .padding(.horizontal, 16.0)
-                    }
-                )
+                categoriesList
+                upcomingEventsList
+                popularEventsList
             }
             .padding(.top, Spacing.padding_3)
-            .padding(.bottom, Spacing.padding_5)
+            .padding(.bottom, Spacing.padding_6)
         }
         .onFirstAppear(viewModel.onFirstAppear)
     }
@@ -87,10 +51,53 @@ private extension HomeView {
     
     var aroundYouText: some View {
         SFProText(
-            text: "There are 32 events\naround your location.",
+            text: "There are \(viewModel.totalNumberOfEvents) events\naround your location.",
             style: .mediumSlateBlue,
             size: 32.0,
             isBold: true
+        )
+    }
+    
+    var categoriesList: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack(spacing: Spacing.padding_2) {
+                ForEach(viewModel.categoryViewModels, content: CategoryCell.init)
+            }
+            .padding(.horizontal, Spacing.padding_2)
+        }
+    }
+    
+    var upcomingEventsList: some View {
+        SectionView(
+            title: "Upcoming Events",
+            trailingContent: .init(
+                title: "See all events",
+                onAction: { }
+            ),
+            content: {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack(spacing: Spacing.padding_2) {
+                        ForEach(viewModel.upcomingEventViewModels, content: UpcomingEventCell.init)
+                    }
+                    .padding(.horizontal, Spacing.padding_2)
+                }
+            }
+        )
+    }
+    
+    var popularEventsList: some View {
+        SectionView(
+            title: "Popular Events",
+            trailingContent: .init(
+                title: "See all events",
+                onAction: { }
+            ),
+            content: {
+                LazyVStack(spacing: Spacing.padding_2) {
+                    ForEach(viewModel.popularEventViewModels, content: PopularEventCell.init)
+                }
+                .padding(.horizontal, Spacing.padding_2)
+            }
         )
     }
 }

@@ -41,7 +41,7 @@ public struct SectionView<Content: View>: View {
             
             content()
         }
-        .padding(.top, Spacing.padding_2)
+        .padding(.top, Spacing.padding_1)
     }
 }
 

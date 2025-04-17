@@ -21,8 +21,10 @@ final class HomeViewModel: ObservableObject {
         case test
     }
     
+    @Published private(set) var totalNumberOfEvents: Int = 0
     @Published private(set) var categoryViewModels: [CategoryCellViewModel] = []
     @Published private(set) var upcomingEventViewModels: [UpcomingEventCellViewModel] = []
+    @Published private(set) var popularEventViewModels: [PopularEventCellViewModel] = []
     
     private let requestService: DashboardRequestServicing
     private let onEvent: (Event) -> Void
@@ -75,8 +77,14 @@ private extension HomeViewModel {
                 receiveCompletion: { _ in
                     
                 },
-                receiveValue: { [unowned self] in
-                    upcomingEventViewModels = $0.map(UpcomingEventCellViewModel.init)
+                receiveValue: { [unowned self] events in
+                    upcomingEventViewModels = events.map(UpcomingEventCellViewModel.init)
+                    
+                    popularEventViewModels = events.enumerated().map {
+                        PopularEventCellViewModel(event: $1, showDivider: $0 != events.endIndex - 1)
+                    }
+                    
+                    totalNumberOfEvents = events.count
                 }
             )
     }
