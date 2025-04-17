@@ -7,10 +7,9 @@ struct GETCategoriesRequest: FirestoreRequest {
 
 extension DashboardCategory: FirestoreData {
     
-    init(dictinary: [String: Any]) {
-        self.init(
-            name: dictinary["name"] as? String ?? "",
-            imageId: dictinary["imageId"] as? Int ?? .zero
-        )
+    init?(id: String, data: [String: Any]) {
+        guard let type = Type(rawValue: data["type"] as? String ?? "") else { return nil }
+        
+        self.init(id: id, type: type)
     }
 }

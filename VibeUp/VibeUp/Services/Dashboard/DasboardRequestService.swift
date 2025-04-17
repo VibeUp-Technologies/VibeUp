@@ -17,4 +17,8 @@ extension DasboardRequestService: DashboardRequestServicing {
     func fetchCategories() -> AnyPublisher<[DashboardCategory], Error> {
         firestoreService.fetch(with: GETCategoriesRequest())
     }
+    
+    func fetchUpcomingEvents() -> AnyPublisher<[DashboardUpcomingEvent], Error> {
+        firestoreService.fetch(with: GETUpcomingEventsRequest())
+    }
 }

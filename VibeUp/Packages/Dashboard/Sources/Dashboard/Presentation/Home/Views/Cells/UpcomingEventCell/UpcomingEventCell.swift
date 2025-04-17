@@ -3,30 +3,22 @@ import DesignSystem
 
 struct UpcomingEventCell: View {
     
-    private let title: String
-    private let price: String
-    private let location: String
+    private let viewModel: UpcomingEventCellViewModel
     
-    init(
-        title: String,
-        price: String,
-        location: String
-    ) {
-        self.title = title
-        self.price = price
-        self.location = location
+    init(viewModel: UpcomingEventCellViewModel) {
+        self.viewModel = viewModel
     }
     
     var body: some View {
         VStack(alignment: .leading, spacing: Spacing.padding_1) {
             ZStack(alignment: .topLeading) {
-                Color.black
+                LazyImage(url: viewModel.image)
                     .cornerRadius(Spacing.padding_1_5)
-                    .frame(width: 260.0, height: 180.0)
+                    .frame(height: 180.0)
                 
                 VStack(spacing: .zero) {
-                    SFProText(text: "Aug", style: .sapphire, size: 14.0)
-                    SFProText(text: "24", style: .sapphire, size: 16.0, isBold: true)
+                    SFProText(text: viewModel.month, style: .sapphire, size: 14.0)
+                    SFProText(text: viewModel.day, style: .sapphire, size: 16.0, isBold: true)
                 }
                 .padding(.horizontal, Spacing.padding_1_5)
                 .padding(.vertical, Spacing.padding_1)
@@ -43,16 +35,19 @@ struct UpcomingEventCell: View {
                 .padding(.leading, Spacing.padding_1_5)
             }
             
-            SFProText(text: title, style: .sapphire, size: 18.0, isBold: true)
-            SFProText(text: price, style: .mediumSlateBlue, size: 18.0, isBold: true)
+            SFProText(text: viewModel.title, style: .sapphire, size: 18.0, isBold: true)
+            SFProText(text: viewModel.price, style: .mediumSlateBlue, size: 18.0, isBold: true)
             
             HStack(spacing: Spacing.padding_0_5) {
                 Resourses.Image.mappin
                     .font(.system(size: 14.0))
                     .foregroundStyle(Resourses.Colors.sapphire)
                 
-                SFProText(text: location, style: .sapphire, size: 14.0)
+                SFProText(text: viewModel.location, style: .sapphire, size: 14.0)
             }
+            
+            Spacer()
         }
+        .frame(width: 260.0)
     }
 }

@@ -1,8 +1,8 @@
 import Foundation
 
-@MainActor
 public final class DateFormatterCache {
 
+    nonisolated(unsafe)
     private static let instance = DateFormatterCache()
 
     private var cache = [DateFormatStyle: DateFormatter]()

@@ -19,14 +19,16 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(path: "DesignSystem")
+        .package(path: "DesignSystem"),
+        .package(path: "Formatter")
     ],
     targets: [
         .target(
             name: "Dashboard",
             dependencies: [
                 "DashboardTypes",
-                "DesignSystem"
+                "DesignSystem",
+                "Formatter"
             ]
         ),
         .target(

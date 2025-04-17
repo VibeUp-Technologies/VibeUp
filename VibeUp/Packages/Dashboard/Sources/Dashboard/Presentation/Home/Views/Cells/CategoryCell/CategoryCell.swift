@@ -3,15 +3,10 @@ import DesignSystem
 
 struct CategoryCell: View {
     
-    private let title: String
-    private let image: Image
+    private let viewModel: CategoryCellViewModel
     
-    init(
-        title: String,
-        image: Image
-    ) {
-        self.title = title
-        self.image = image
+    init(viewModel: CategoryCellViewModel) {
+        self.viewModel = viewModel
     }
     
     var body: some View {
@@ -25,11 +20,11 @@ struct CategoryCell: View {
                 .padding(.vertical, Spacing.padding_0_25)
             
             VStack(alignment: .leading, spacing: Spacing.padding_2) {
-                image
+                Image(systemName: viewModel.image)
                     .font(.system(size: 22.0))
                     .foregroundStyle(Resourses.Colors.sapphire)
                 
-                SFProText(text: title, style: .sapphire, size: 15.0)
+                SFProText(text: viewModel.title, style: .sapphire, size: 15.0)
             }
             .padding(.horizontal, Spacing.padding_2)
             .padding(.vertical, Spacing.padding_1_5)

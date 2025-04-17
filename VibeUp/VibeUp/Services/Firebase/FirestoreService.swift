@@ -5,7 +5,7 @@ import FirebaseFirestore
 
 protocol FirestoreData {
     
-    init(dictinary: [String: Any])
+    init?(id: String, data: [String: Any])
 }
 
 protocol FirestoreRequest {
@@ -47,7 +47,9 @@ extension FirestoreService: FirestoreServicing {
                     return
                 }
                 
-                promise(.success(snapshot.documents.map { .init(dictinary: $0.data()) }))
+                print("-->", snapshot.documents.compactMap { $0.data() })
+                
+                promise(.success(snapshot.documents.compactMap { .init(id: $0.documentID, data: $0.data()) }))
             }
         }
         .eraseToAnyPublisher()

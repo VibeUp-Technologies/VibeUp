@@ -21,12 +21,14 @@ final class HomeViewModel: ObservableObject {
         case test
     }
     
-    @Published private(set) var categories: [DashboardCategory] = []
+    @Published private(set) var categoryViewModels: [CategoryCellViewModel] = []
+    @Published private(set) var upcomingEventViewModels: [UpcomingEventCellViewModel] = []
     
     private let requestService: DashboardRequestServicing
     private let onEvent: (Event) -> Void
     
     private var categoriesCancelabel: AnyCancellable?
+    private var upcomingEventsCancelabel: AnyCancellable?
     
     init(
         dependency: Dependency,
@@ -43,6 +45,7 @@ extension HomeViewModel {
     
     func onFirstAppear() {
         fetchCategeries()
+        fetchUpcomingEvents()
     }
     
     func onTest() {
@@ -61,7 +64,19 @@ private extension HomeViewModel {
                     
                 },
                 receiveValue: { [unowned self] in
-                    categories = $0
+                    categoryViewModels = $0.map(CategoryCellViewModel.init)
+                }
+            )
+    }
+    
+    func fetchUpcomingEvents() {
+        upcomingEventsCancelabel = requestService.fetchUpcomingEvents()
+            .sink(
+                receiveCompletion: { _ in
+                    
+                },
+                receiveValue: { [unowned self] in
+                    upcomingEventViewModels = $0.map(UpcomingEventCellViewModel.init)
                 }
             )
     }

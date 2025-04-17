@@ -17,6 +17,7 @@
 		103ABD4E2DB0111A0073D19B /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 103ABD4D2DB0111A0073D19B /* FirebaseStorage */; };
 		103ABD572DB128B80073D19B /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 103ABD562DB128B80073D19B /* FirebaseDatabase */; };
 		103ABD5C2DB1367D0073D19B /* DashboardTypes in Frameworks */ = {isa = PBXBuildFile; productRef = 103ABD5B2DB1367D0073D19B /* DashboardTypes */; };
+		103FD6202DB15A2C00750FEE /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 103FD61F2DB15A2C00750FEE /* SDWebImageSwiftUI */; };
 		1094D02B2DAEF3BD000233BF /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 1094D02A2DAEF3BD000233BF /* DesignSystem */; };
 		10E014502DAD9785002B6CEC /* Dashboard in Frameworks */ = {isa = PBXBuildFile; productRef = 10E0144F2DAD9785002B6CEC /* Dashboard */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 				103ABD482DB0111A0073D19B /* FirebaseCrashlytics in Frameworks */,
 				103ABD422DB0111A0073D19B /* FirebaseAnalytics in Frameworks */,
 				103ABD5C2DB1367D0073D19B /* DashboardTypes in Frameworks */,
+				103FD6202DB15A2C00750FEE /* SDWebImageSwiftUI in Frameworks */,
 				103ABD4A2DB0111A0073D19B /* FirebaseFirestore in Frameworks */,
 				103ABD572DB128B80073D19B /* FirebaseDatabase in Frameworks */,
 				103ABD462DB0111A0073D19B /* FirebaseCore in Frameworks */,
@@ -138,6 +140,7 @@
 				103ABD4D2DB0111A0073D19B /* FirebaseStorage */,
 				103ABD562DB128B80073D19B /* FirebaseDatabase */,
 				103ABD5B2DB1367D0073D19B /* DashboardTypes */,
+				103FD61F2DB15A2C00750FEE /* SDWebImageSwiftUI */,
 			);
 			productName = VibeUp;
 			productReference = 109CC89F2DAC24420009F041 /* VibeUp.app */;
@@ -170,6 +173,7 @@
 			packageReferences = (
 				103ABD3D2DB010B30073D19B /* XCRemoteSwiftPackageReference "FlowStacks" */,
 				103ABD402DB0111A0073D19B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				103FD61E2DB15A2C00750FEE /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 109CC8A02DAC24420009F041 /* Products */;
@@ -432,6 +436,14 @@
 				minimumVersion = 11.11.0;
 			};
 		};
+		103FD61E2DB15A2C00750FEE /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -483,6 +495,11 @@
 		103ABD5B2DB1367D0073D19B /* DashboardTypes */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DashboardTypes;
+		};
+		103FD61F2DB15A2C00750FEE /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 103FD61E2DB15A2C00750FEE /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 		1094D02A2DAEF3BD000233BF /* DesignSystem */ = {
 			isa = XCSwiftPackageProductDependency;

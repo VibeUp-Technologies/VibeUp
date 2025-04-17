@@ -2,14 +2,25 @@ import Foundation
 
 public struct DashboardCategory {
     
-    public let name: String
-    public let imageId: Int
+    public let id: String
+    public let type: `Type`
     
     public init(
-        name: String,
-        imageId: Int
+        id: String,
+        type: Type
     ) {
-        self.name = name
-        self.imageId = imageId
+        self.id = id
+        self.type = type
+    }
+}
+
+public extension DashboardCategory {
+    
+    enum `Type`: String {
+        case food
+        case music
+        case comedy
+        case festival
+        case clothing
     }
 }

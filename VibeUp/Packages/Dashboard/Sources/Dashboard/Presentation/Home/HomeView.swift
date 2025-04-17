@@ -20,11 +20,9 @@ struct HomeView: View {
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: Spacing.padding_2) {
-                        ForEach(viewModel.categories.indices, id: \.self) { index in
-                            CategoryCell(title: viewModel.categories[index].name, image: Resourses.Image.musicNote)
-                        }
+                        ForEach(viewModel.categoryViewModels, content: CategoryCell.init)
                     }
-                    .padding(.leading, 16.0)
+                    .padding(.horizontal, Spacing.padding_2)
                 }
                 
                 SectionView(
@@ -36,10 +34,9 @@ struct HomeView: View {
                     content: {
                         ScrollView(.horizontal, showsIndicators: false) {
                             LazyHStack(spacing: Spacing.padding_2) {
-                                UpcomingEventCell(title: "Bernadya Solo Concert", price: "Rp250k - Rp500k", location: "Mojokerto, East Jave")
-                                UpcomingEventCell(title: "Moshig Fest", price: "Rp80k - Rp250k", location: "Jombang, East Jave")
+                                ForEach(viewModel.upcomingEventViewModels, content: UpcomingEventCell.init)
                             }
-                            .padding(.horizontal, 16.0)
+                            .padding(.horizontal, Spacing.padding_2)
                         }
                     }
                 )
