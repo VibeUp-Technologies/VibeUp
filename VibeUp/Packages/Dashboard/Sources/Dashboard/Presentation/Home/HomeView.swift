@@ -29,13 +29,22 @@ struct HomeView: View {
                 }
                 .frame(height: 80.0)
                 
-                LazyVStack(spacing: 16.0) {
-                    Color.red.frame(height: 300.0).onTapGesture(perform: viewModel.onTest)
-                    Color.red.frame(height: 300.0).onTapGesture(perform: viewModel.onTest)
-                    Color.red.frame(height: 300.0).onTapGesture(perform: viewModel.onTest)
-                    Color.red.frame(height: 300.0).onTapGesture(perform: viewModel.onTest)
-                }
-                .padding(.horizontal, 16.0)
+                SectionView(
+                    title: "Upcoming Events",
+                    trailingContent: .init(
+                        title: "See all events",
+                        onAction: { }
+                    ),
+                    content: {
+                        LazyVStack(spacing: 16.0) {
+                            Color.red.frame(height: 300.0).onTapGesture(perform: viewModel.onTest)
+                            Color.red.frame(height: 300.0).onTapGesture(perform: viewModel.onTest)
+                            Color.red.frame(height: 300.0).onTapGesture(perform: viewModel.onTest)
+                            Color.red.frame(height: 300.0).onTapGesture(perform: viewModel.onTest)
+                        }
+                        .padding(.horizontal, 16.0)
+                    }
+                )
                 
                 Spacer()
             }
