@@ -54,6 +54,7 @@ extension AuthService: AuthServicing {
         .eraseToAnyPublisher()
     }
     
+    // TODO: - Create favorite collection
     func singUp(email: String, password: String) -> AnyPublisher<Void, Error> {
         Future { [unowned self] promise in
             auth.createUser(withEmail: email, password: password) { result, error in
