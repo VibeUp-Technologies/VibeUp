@@ -14,6 +14,10 @@ public final class BackdoorCoordinator: ObservableObject {
 
 extension BackdoorCoordinator {
     
+    func makeSignInViewModel() -> SignInViewModel {
+        SignInViewModel(authService: dependency.services.authService)
+    }
+    
     func makeSignUpViewModel() -> SignUpViewModel {
         SignUpViewModel(authService: dependency.services.authService)
     }

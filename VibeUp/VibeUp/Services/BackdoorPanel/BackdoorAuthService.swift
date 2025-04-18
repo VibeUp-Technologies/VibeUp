@@ -14,6 +14,10 @@ final class BackdoorAuthService {
 
 extension BackdoorAuthService: BackdoorAuthServicing {
     
+    func signIn(with body: BackdoorSignIn) -> AnyPublisher<Void, Error> {
+        authService.signIn(email: body.email, password: body.password)
+    }
+    
     func signUp(with body: BackdoorSignUp) -> AnyPublisher<Void, Error> {
         authService.singUp(email: body.email, password: body.password)
     }
