@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "Dashboard",
+    defaultLocalization: "uk",
     platforms: [
         .iOS(.v16)
     ],
@@ -21,7 +22,14 @@ let package = Package(
     dependencies: [
         .package(path: "DesignSystem"),
         .package(path: "Formatter"),
-        .package(url: "https://github.com/johnpatrickmorgan/FlowStacks.git", .upToNextMajor(from: "0.8.3"))
+        .package(
+            url: "https://github.com/johnpatrickmorgan/FlowStacks.git",
+            .upToNextMajor(from: "0.8.3")
+        ),
+        .package(
+            url: "https://github.com/liamnichols/xcstrings-tool-plugin.git",
+            from: "1.1.0"
+        )
     ],
     targets: [
         .target(
@@ -30,7 +38,11 @@ let package = Package(
                 "DashboardTypes",
                 "DesignSystem",
                 "Formatter",
-                "FlowStacks"
+                "FlowStacks",
+                .product(name: "XCStringsToolPlugin", package: "xcstrings-tool-plugin")
+            ],
+            resources: [
+                .process("Resources")
             ]
         ),
         .target(

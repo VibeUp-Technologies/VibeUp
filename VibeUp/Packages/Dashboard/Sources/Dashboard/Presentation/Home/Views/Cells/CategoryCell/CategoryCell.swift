@@ -22,9 +22,9 @@ struct CategoryCell: View {
             VStack(alignment: .leading, spacing: Spacing.padding_2) {
                 Image(systemName: viewModel.image)
                     .font(.system(size: 22.0))
-                    .foregroundStyle(Resourses.Colors.sapphire)
+                    .foregroundStyle(Resources.Colors.sapphire)
                 
-                SFProText(text: viewModel.title, style: .sapphire, size: 15.0)
+                SFProText(text: viewModel.title.localized, style: .sapphire, size: 15.0)
             }
             .padding(.horizontal, Spacing.padding_2)
             .padding(.vertical, Spacing.padding_1_5)

@@ -1,6 +1,6 @@
 import SwiftUI
 
-public enum Resourses {
+public enum Resources {
     
     public enum Colors {
         

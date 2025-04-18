@@ -39,9 +39,9 @@ struct UpcomingEventCell: View {
             SFProText(text: viewModel.price, style: .mediumSlateBlue, size: 18.0, isBold: true)
             
             HStack(spacing: Spacing.padding_0_5) {
-                Resourses.Image.mappin
+                Resources.Image.mappin
                     .font(.system(size: 14.0))
-                    .foregroundStyle(Resourses.Colors.sapphire)
+                    .foregroundStyle(Resources.Colors.sapphire)
                 
                 SFProText(text: viewModel.location, style: .sapphire, size: 14.0)
             }

@@ -42,9 +42,9 @@ private extension SFProText.Style {
         case .default:
             .white
         case .sapphire:
-            Resourses.Colors.sapphire
+            Resources.Colors.sapphire
         case .mediumSlateBlue:
-            Resourses.Colors.mediumSlateBlue
+            Resources.Colors.mediumSlateBlue
         }
     }
 }

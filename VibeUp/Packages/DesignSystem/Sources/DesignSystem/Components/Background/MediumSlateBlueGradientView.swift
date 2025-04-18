@@ -1,6 +1,6 @@
 import SwiftUI
 
-public struct BackgroundGradientView: View {
+public struct MediumSlateBlueGradientView: View {
     
     public init() { }
     
@@ -15,7 +15,7 @@ public struct BackgroundGradientView: View {
 
 // MARK: - Private
 
-private extension BackgroundGradientView {
+private extension MediumSlateBlueGradientView {
     
     var gradinet: Gradient {
         Gradient(

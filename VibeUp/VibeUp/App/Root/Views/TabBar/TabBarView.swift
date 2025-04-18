@@ -22,11 +22,12 @@ struct TabBarView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            BackgroundGradientView()
+            MediumSlateBlueGradientView()
                 .ignoresSafeArea()
             
             VStack(spacing: .zero) {
                 PageView(selectedIndex: $selectedIndex, pages: pages)
+                    .overlay(alignment: .bottom, content: { bottomGradient })
                     .padding(.bottom, -Constants.tabBarHeight * 0.5)
                 
                 tabBarView
@@ -65,6 +66,20 @@ private extension TabBarView {
     var pages: [AnyView] {
         tabs.map { TabFactory.makePageView(by: $0).eraseToAnyView() }
     }
+    
+    var bottomGradient: some View {
+        LinearGradient(
+            gradient: Gradient(
+                colors: [
+                    .clear,
+                    .white
+                ]
+            ),
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .frame(height: 20.0)
+    }
 }
 
 // MARK: - TabFactory
@@ -93,28 +108,28 @@ private extension TabBarView {
             case .home:
                 TabItemView(
                     isSelected: isSelected,
-                    image: Resourses.Image.homeFill,
+                    image: Resources.Image.homeFill,
                     name: "Home",
                     action: action
                 )
             case .explore:
                 TabItemView(
                     isSelected: isSelected,
-                    image: Resourses.Image.compassFill,
+                    image: Resources.Image.compassFill,
                     name: "Explore",
                     action: action
                 )
             case .saved:
                 TabItemView(
                     isSelected: isSelected,
-                    image: Resourses.Image.heartFill,
+                    image: Resources.Image.heartFill,
                     name: "Favorites",
                     action: action
                 )
             case .profile:
                 TabItemView(
                     isSelected: isSelected,
-                    image: Resourses.Image.profileFill,
+                    image: Resources.Image.profileFill,
                     name: "Profile",
                     action: action
                 )

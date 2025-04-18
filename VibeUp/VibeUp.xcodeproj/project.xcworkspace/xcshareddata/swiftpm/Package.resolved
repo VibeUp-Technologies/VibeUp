@@ -1,5 +1,5 @@
 {
-  "originHash" : "1ee76497c01fef1120b8c44d6dea5eedc8b56f660dc50598b07c3fe2a4f8bb49",
+  "originHash" : "525423268e3b163b9b6293333dee5cf9ee9adf8aabfa7e1e1d387950a24f2d66",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -143,6 +143,15 @@
       "state" : {
         "revision" : "d72aed98f8253ec1aa9ea1141e28150f408cf17f",
         "version" : "1.29.0"
+      }
+    },
+    {
+      "identity" : "xcstrings-tool-plugin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/liamnichols/xcstrings-tool-plugin.git",
+      "state" : {
+        "revision" : "5ef0451aa37aa4f9411167ff24cca4123a64c499",
+        "version" : "1.1.0"
       }
     }
   ],

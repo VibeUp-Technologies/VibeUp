@@ -27,7 +27,7 @@ struct TabItemView: View {
                 HStack(spacing: Spacing.padding_0_5) {
                     image
                         .font(.system(size: 18.0))
-                        .foregroundStyle(isSelected ? .white : Resourses.Colors.mediumSlateBlue)
+                        .foregroundStyle(isSelected ? .white : Resources.Colors.mediumSlateBlue)
                     
                     if isSelected {
                         SFProText(text: name, size: 14.0)
@@ -36,7 +36,7 @@ struct TabItemView: View {
                 .background(
                     Group {
                         if isSelected {
-                            Resourses.Colors.mediumSlateBlue
+                            Resources.Colors.mediumSlateBlue
                                 .cornerRadius(Spacing.padding_2_5)
                                 .padding(-Spacing.padding_1)
                         }
