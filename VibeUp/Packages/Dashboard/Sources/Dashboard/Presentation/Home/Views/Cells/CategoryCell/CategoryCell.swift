@@ -29,6 +29,7 @@ struct CategoryCell: View {
             .padding(.horizontal, Spacing.padding_2)
             .padding(.vertical, Spacing.padding_1_5)
         }
+        .onTapGesture(perform: viewModel.onTap)
         .frame(minWidth: 100.0)
     }
 }

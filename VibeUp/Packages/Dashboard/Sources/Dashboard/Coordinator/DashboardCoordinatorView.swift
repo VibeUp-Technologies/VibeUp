@@ -12,16 +12,16 @@ public struct DashboardCoordinatorView: View {
     }
     
     public var body: some View {
-        FlowStack($coordinator.routes) {
+        FlowStack($coordinator.routes, withNavigation: true) {
             HomeView(viewModel: coordinator.makeHomeViewModel())
                 .flowDestination(for: Screen.self) { screen in
                     switch screen {
-                    case .test:
+                    case .category:
                         Color.red
                             .navigationBar(
                                 configuration: .init(
                                     leadingItems: [
-                                        .button(BackNavigationBarItemButton(action: { coordinator.routes.pop() }))
+                                        BackNavigationBarItemButton(action: { coordinator.routes.pop() })
                                     ],
                                     isBackgroundHidden: false
                                 )

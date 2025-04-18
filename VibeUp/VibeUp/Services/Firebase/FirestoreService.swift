@@ -38,7 +38,7 @@ extension FirestoreService: FirestoreServicing {
         Future { [unowned self] promise in
             firestore.collection(request.path).getDocuments() { snapshot, error in
                 if let error = error {
-                    print("💥 Error fetching categories: \(error)")
+                    print("💥 Fetching rrror: \(error)")
                     return
                 }
                 

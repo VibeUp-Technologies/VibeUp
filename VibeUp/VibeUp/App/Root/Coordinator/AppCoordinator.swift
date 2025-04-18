@@ -1,11 +1,8 @@
 import Foundation
 import FlowStacks
+import BackdoorPanel
 import Dashboard
 import Explore
-
-enum Screen: Hashable {
-    case dashboard
-}
 
 final class AppCoordinator: ObservableObject {
     
@@ -20,8 +17,20 @@ final class AppCoordinator: ObservableObject {
         ]
     }()
     
+    private let authService = AuthService()
     private let firestoreService = FirestoreService()
 }
+
+// MARK: - Actions
+
+extension AppCoordinator {
+    
+    func onBackdoor() {
+        routes.presentSheet(.backdoor(makeBackdoorCoordinates()))
+    }
+}
+
+// MARK: - Private
 
 private extension AppCoordinator {
     
@@ -37,5 +46,15 @@ private extension AppCoordinator {
     
     func makeExploreCoordinator() -> ExploreCoordinator {
         ExploreCoordinator(dependency: .init(services: .init()))
+    }
+    
+    func makeBackdoorCoordinates() -> BackdoorCoordinator {
+        BackdoorCoordinator(
+            dependency: .init(
+                services: .init(
+                    authService: BackdoorAuthService(authService: authService)
+                )
+            )
+        )
     }
 }

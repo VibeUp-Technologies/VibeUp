@@ -1,31 +1,5 @@
 import Foundation
 import FlowStacks
-import DashboardTypes
-
-enum Screen: Hashable {
-    case test
-}
-
-public extension DashboardCoordinator {
-    
-    struct Dependency {
-        
-        let services: Services
-        
-        public init(services: Services) {
-            self.services = services
-        }
-    }
-    
-    struct Services {
-        
-        let requestService: DashboardRequestServicing
-        
-        public init(requestService: DashboardRequestServicing) {
-            self.requestService = requestService
-        }
-    }
-}
 
 public final class DashboardCoordinator: ObservableObject {
     
@@ -51,8 +25,8 @@ extension DashboardCoordinator {
                 guard let self else { return }
                 
                 switch event {
-                case .test:
-                    routes.push(.test)
+                case let .category(category):
+                    routes.push(.category)
                 }
             }
         )

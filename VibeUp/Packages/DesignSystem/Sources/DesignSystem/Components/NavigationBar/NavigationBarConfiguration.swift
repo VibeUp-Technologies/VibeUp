@@ -1,23 +1,20 @@
 import SwiftUI
-
-public enum NavigationBarItem {
-    
-    case button(any NavigationBarItemButtonRepresentation)
-}
-
 public struct NavigationBarConfiguration {
     
-    let leadingItems: [NavigationBarItem]
-    let trailingItems: [NavigationBarItem]
+    let leadingItems: [any NavigationBarItemButtonRepresentation]
+    let trailingItems: [any NavigationBarItemButtonRepresentation]
     let isBackgroundHidden: Bool
+    let isHidden: Bool
     
     public init(
-        leadingItems: [NavigationBarItem] = [],
-        trailingItems: [NavigationBarItem] = [],
-        isBackgroundHidden: Bool = false
+        leadingItems: [any NavigationBarItemButtonRepresentation] = [],
+        trailingItems: [any NavigationBarItemButtonRepresentation] = [],
+        isBackgroundHidden: Bool = false,
+        isHidden: Bool = false
     ) {
         self.leadingItems = leadingItems
         self.trailingItems = trailingItems
         self.isBackgroundHidden = isBackgroundHidden
+        self.isHidden = isHidden
     }
 }

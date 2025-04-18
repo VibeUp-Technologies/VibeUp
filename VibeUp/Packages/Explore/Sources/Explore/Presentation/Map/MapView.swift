@@ -1,5 +1,6 @@
 import SwiftUI
 import MapKit
+import DesignSystem
 
 struct MapView: View {
     
@@ -34,5 +35,6 @@ struct MapView: View {
                 }
             }
         }
+        .navigationBar(configuration: .init(isHidden: true))
     }
 }

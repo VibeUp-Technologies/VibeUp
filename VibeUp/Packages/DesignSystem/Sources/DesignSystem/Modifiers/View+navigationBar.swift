@@ -16,6 +16,10 @@ private struct NavigationBarModifier: ViewModifier {
             .toolbar {
                 NavigationBar(configuration: configuration)
             }
+            .toolbar(
+                configuration.isHidden ? .hidden : .visible,
+                for: .navigationBar
+            )
             .toolbarBackground(
                 configuration.isBackgroundHidden ? .hidden : .visible,
                 for: .navigationBar

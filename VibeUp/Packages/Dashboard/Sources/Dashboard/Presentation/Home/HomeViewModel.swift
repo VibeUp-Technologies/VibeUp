@@ -18,7 +18,7 @@ extension HomeViewModel {
 final class HomeViewModel: ObservableObject {
     
     enum Event {
-        case test
+        case category(DashboardCategory)
     }
     
     @Published private(set) var totalNumberOfEvents: Int = 0
@@ -49,10 +49,6 @@ extension HomeViewModel {
         fetchCategeries()
         fetchUpcomingEvents()
     }
-    
-    func onTest() {
-        onEvent(.test)
-    }
 }
 
 // MARK: - Private
@@ -65,8 +61,18 @@ private extension HomeViewModel {
                 receiveCompletion: { _ in
                     
                 },
-                receiveValue: { [unowned self] in
-                    categoryViewModels = $0.map(CategoryCellViewModel.init)
+                receiveValue: { [unowned self] categories in
+                    categoryViewModels = categories.map { category in
+                        CategoryCellViewModel(
+                            category: category,
+                            onEvent: { [weak self] event in
+                                switch event {
+                                case .details:
+                                    self?.onEvent(.category(category))
+                                }
+                            }
+                        )
+                    }
                 }
             )
     }

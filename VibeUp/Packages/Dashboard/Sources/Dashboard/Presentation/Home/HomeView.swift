@@ -14,15 +14,17 @@ struct HomeView: View {
     }
     
     public var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading, spacing: Spacing.padding_2) {
-                headerText
-                categoriesList
-                upcomingEventsList
-                popularEventsList
+        VStack(alignment: .leading, spacing: Spacing.padding_2) {
+            yourLocation
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: Spacing.padding_2) {
+                    headerText
+                    categoriesList
+                    upcomingEventsList
+                    popularEventsList
+                }
+                .padding(.bottom, Spacing.padding_6)
             }
-            .padding(.top, Spacing.padding_3)
-            .padding(.bottom, Spacing.padding_6)
         }
         .onFirstAppear(viewModel.onFirstAppear)
     }
@@ -31,6 +33,20 @@ struct HomeView: View {
 // MARK: - Private
 
 private extension HomeView {
+    
+    var yourLocation: some View {
+        VStack(alignment: .leading, spacing: .zero) {
+            HStack(spacing: Spacing.padding_0_5) {
+                Resources.Image.locationFill
+                    .font(.system(size: 12.0))
+                    .foregroundStyle(Resources.Colors.sapphire)
+                
+                SFProText(text: "Your location", style: .sapphire, size: 12.0)
+            }
+            SFProText(text: "Los Angeles, CA", style: .sapphire, size: 18.0, isBold: true)
+        }
+        .padding(.horizontal, Spacing.padding_2)
+    }
     
     var headerText: some View {
         VStack(alignment: .leading, spacing: .zero) {

@@ -19,13 +19,10 @@ struct NavigationBar: ToolbarContent {
 private extension NavigationBar {
     
     @ViewBuilder
-    func makeNavigationBarItemContent(items: [NavigationBarItem]) -> some View {
+    func makeNavigationBarItemContent(items: [any NavigationBarItemButtonRepresentation]) -> some View {
         HStack(spacing: Spacing.padding_1) {
             ForEach(items.indices, id: \.self) { index in
-                switch items[index] {
-                case .button(let view):
-                    view.eraseToAnyView()
-                }
+                items[index].eraseToAnyView()
             }
         }
     }
