@@ -13,7 +13,10 @@ public struct BackdoorCoordinatorView: View {
     
     public var body: some View {
         FlowStack($coordinator.routes, withNavigation: true) {
-            BackdoorView(signUpViewModel: coordinator.makeSignUpViewModel())
+            BackdoorView(
+                signUpViewModel: coordinator.makeSignUpViewModel(),
+                logOutViewModel: coordinator.makeLogOutViewModel()
+            )
         }
     }
 }

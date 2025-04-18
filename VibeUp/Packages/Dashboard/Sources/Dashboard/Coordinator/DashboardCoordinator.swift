@@ -17,6 +17,9 @@ extension DashboardCoordinator {
     func makeHomeViewModel() -> HomeViewModel {
         HomeViewModel(
             dependency: .init(
+                input: .init(
+                    isAuthenticated: dependency.input.isAuthenticated
+                ),
                 services: .init(
                     requestService: dependency.services.requestService
                 )

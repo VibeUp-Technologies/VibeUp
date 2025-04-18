@@ -17,4 +17,8 @@ extension BackdoorAuthService: BackdoorAuthServicing {
     func signUp(with body: BackdoorSignUp) -> AnyPublisher<Void, Error> {
         authService.singUp(email: body.email, password: body.password)
     }
+    
+    func logOut() -> AnyPublisher<Void, Error> {
+        authService.logOut()
+    }
 }

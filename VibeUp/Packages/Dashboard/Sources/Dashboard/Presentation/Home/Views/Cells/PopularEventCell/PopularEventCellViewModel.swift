@@ -2,7 +2,7 @@ import Foundation
 import DashboardTypes
 import Formatter
 
-struct PopularEventCellViewModel: Identifiable {
+final class PopularEventCellViewModel: Identifiable, ObservableObject {
     
     let id: String
     let image: URL?
@@ -12,18 +12,27 @@ struct PopularEventCellViewModel: Identifiable {
     let location: String
     let showDivider: Bool
     
-    init(
-        event: DashboardUpcomingEvent,
-        showDivider: Bool
-    ) {
-        id = event.id
-        image = URL(string: event.image)
-        date = event.date.prettyFormatted(with: .format(.custom("dd MMM, HH:mm")))
-        title = event.name
-        price = Self.makePrice(for: event)
-        location = event.location
+    @Published private(set) var isFavorite: Bool
+    @Published private(set) var isBookmarkShown = false
+    
+    init(dependency: Dependency) {
+        id = dependency.input.event.id
+        image = URL(string: dependency.input.event.image)
+        date = dependency.input.event.date.prettyFormatted(with: .format(.custom("dd MMM, HH:mm")))
+        title = dependency.input.event.name
+        price = Self.makePrice(for: dependency.input.event)
+        isFavorite = false
+        location = dependency.input.event.location
+        showDivider = dependency.input.showDivider
         
-        self.showDivider = showDivider
+        dependency.input.isAuthenticated.assign(to: &$isBookmarkShown)
+    }
+}
+
+extension PopularEventCellViewModel {
+    
+    func onFavorite() {
+        isFavorite.toggle()
     }
 }
 

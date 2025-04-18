@@ -2,19 +2,6 @@ import Foundation
 import Combine
 import DashboardTypes
 
-extension HomeViewModel {
-    
-    struct Dependency {
-        
-        let services: Services
-    }
-    
-    struct Services {
-        
-        let requestService: DashboardRequestServicing
-    }
-}
-
 final class HomeViewModel: ObservableObject {
     
     enum Event {
@@ -26,7 +13,7 @@ final class HomeViewModel: ObservableObject {
     @Published private(set) var upcomingEventViewModels: [UpcomingEventCellViewModel] = []
     @Published private(set) var popularEventViewModels: [PopularEventCellViewModel] = []
     
-    private let requestService: DashboardRequestServicing
+    private let dependency: Dependency
     private let onEvent: (Event) -> Void
     
     private var categoriesCancelabel: AnyCancellable?
@@ -36,7 +23,7 @@ final class HomeViewModel: ObservableObject {
         dependency: Dependency,
         onEvent: @escaping (Event) -> Void
     ) {
-        self.requestService = dependency.services.requestService
+        self.dependency = dependency
         self.onEvent = onEvent
     }
 }
@@ -56,7 +43,7 @@ extension HomeViewModel {
 private extension HomeViewModel {
     
     func fetchCategeries() {
-        categoriesCancelabel = requestService.fetchCategories()
+        categoriesCancelabel = dependency.services.requestService.fetchCategories()
             .sink(
                 receiveCompletion: { _ in
                     
@@ -78,7 +65,7 @@ private extension HomeViewModel {
     }
     
     func fetchUpcomingEvents() {
-        upcomingEventsCancelabel = requestService.fetchUpcomingEvents()
+        upcomingEventsCancelabel = dependency.services.requestService.fetchUpcomingEvents()
             .sink(
                 receiveCompletion: { _ in
                     
@@ -86,8 +73,19 @@ private extension HomeViewModel {
                 receiveValue: { [unowned self] events in
                     upcomingEventViewModels = events.map(UpcomingEventCellViewModel.init)
                     
-                    popularEventViewModels = events.enumerated().map {
-                        PopularEventCellViewModel(event: $1, showDivider: $0 != events.endIndex - 1)
+                    popularEventViewModels = events.enumerated().map { index, event in
+                        PopularEventCellViewModel(
+                            dependency: .init(
+                                input: .init(
+                                    isAuthenticated: dependency.input.isAuthenticated,
+                                    event: event,
+                                    showDivider: index != events.endIndex - 1
+                                ),
+                                services: .init(
+                                    requestService: dependency.services.requestService
+                                )
+                            )
+                        )
                     }
                     
                     totalNumberOfEvents = events.count

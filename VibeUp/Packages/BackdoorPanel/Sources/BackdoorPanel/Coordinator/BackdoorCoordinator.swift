@@ -17,6 +17,10 @@ extension BackdoorCoordinator {
     func makeSignUpViewModel() -> SignUpViewModel {
         SignUpViewModel(authService: dependency.services.authService)
     }
+    
+    func makeLogOutViewModel() -> LogOutViewModel {
+        LogOutViewModel(authService: dependency.services.authService)
+    }
 }
 
 // TODO: - Move to FlowStacks

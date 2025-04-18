@@ -37,6 +37,9 @@ private extension AppCoordinator {
     func makeDashboardCoordinator() -> DashboardCoordinator {
         DashboardCoordinator(
             dependency: .init(
+                input: .init(
+                    isAuthenticated: authService.isAuthenticated
+                ),
                 services: .init(
                     requestService: DasboardRequestService(firestoreService: firestoreService)
                 )

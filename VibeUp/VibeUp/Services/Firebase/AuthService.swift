@@ -3,10 +3,19 @@ import FirebaseAuth
 
 protocol AuthServicing {
     
+    var isAuthenticated: AnyPublisher<Bool, Never> { get }
+    
     func singUp(email: String, password: String) -> AnyPublisher<Void, Error>
+    func logOut() -> AnyPublisher<Void, Error>
 }
 
 final class AuthService {
+    
+    lazy var isAuthenticated: AnyPublisher<Bool, Never> = _isAuthenticated.eraseToAnyPublisher()
+    
+    private lazy var _isAuthenticated: CurrentValueSubject<Bool, Never> = .init(
+        auth.currentUser != nil
+    )
     
     private lazy var auth = Auth.auth()
 }
@@ -30,7 +39,22 @@ extension AuthService: AuthServicing {
                 
                 print("-->", result.user)
                 
+                _isAuthenticated.send(true)
+                
                 promise(.success(()))
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    func logOut() -> AnyPublisher<Void, Error> {
+        Future { [unowned self] promise in
+            do {
+                try auth.signOut()
+                _isAuthenticated.send(false)
+                promise(.success(()))
+            } catch {
+                promise(.failure(error))
             }
         }
         .eraseToAnyPublisher()
