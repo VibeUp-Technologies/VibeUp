@@ -10,11 +10,22 @@ protocol FirestoreData {
 
 protocol FirestoreRequest {
     
-    var path: String { get }
+    var collection: String { get }
+    var document: String { get }
+    
+    var body: [String: Any] { get }
+}
+
+extension FirestoreRequest {
+    
+    var document: String { "" }
+    var body: [String: Any] { [:] }
 }
 
 protocol FirestoreServicing {
-    func fetch<Data: FirestoreData>(with request: FirestoreRequest) -> AnyPublisher<[Data], Error>
+    
+    func get<Data: FirestoreData>(with request: FirestoreRequest) -> AnyPublisher<[Data], Error>
+    func update(with request: FirestoreRequest) -> AnyPublisher<Void, Error>
 }
 
 final class FirestoreService {
@@ -34,9 +45,9 @@ final class FirestoreService {
 
 extension FirestoreService: FirestoreServicing {
  
-    func fetch<Data: FirestoreData>(with request: FirestoreRequest) -> AnyPublisher<[Data], Error> {
+    func get<Data: FirestoreData>(with request: FirestoreRequest) -> AnyPublisher<[Data], Error> {
         Future { [unowned self] promise in
-            firestore.collection(request.path).getDocuments() { snapshot, error in
+            firestore.collection(request.collection).getDocuments() { snapshot, error in
                 if let error = error {
                     print("💥 Fetching rrror: \(error)")
                     return
@@ -50,6 +61,20 @@ extension FirestoreService: FirestoreServicing {
                 print("-->", snapshot.documents.compactMap { $0.data() })
                 
                 promise(.success(snapshot.documents.compactMap { .init(id: $0.documentID, data: $0.data()) }))
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    func update(with request: FirestoreRequest) -> AnyPublisher<Void, Error> {
+        Future { [unowned self] promise in
+            firestore.collection(request.collection).document(request.document).updateData(request.body) { error in
+                if let error = error {
+                    print("💥 Fetching rrror: \(error)")
+                    return
+                }
+                
+                promise(.success(()))
             }
         }
         .eraseToAnyPublisher()

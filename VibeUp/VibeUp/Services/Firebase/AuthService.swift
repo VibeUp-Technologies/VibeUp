@@ -3,6 +3,7 @@ import FirebaseAuth
 
 protocol AuthServicing {
     
+    var user: AnyPublisher<User?, Never> { get }
     var isAuthenticated: AnyPublisher<Bool, Never> { get }
     
     func signIn(email: String, password: String) -> AnyPublisher<Void, Error>
@@ -12,10 +13,15 @@ protocol AuthServicing {
 
 final class AuthService {
     
-    lazy var isAuthenticated: AnyPublisher<Bool, Never> = _isAuthenticated.eraseToAnyPublisher()
+    lazy var user: AnyPublisher<User?, Never> = _user
+        .eraseToAnyPublisher()
     
-    private lazy var _isAuthenticated: CurrentValueSubject<Bool, Never> = .init(
-        auth.currentUser != nil
+    lazy var isAuthenticated: AnyPublisher<Bool, Never> = _user
+        .map { $0 != nil }
+        .eraseToAnyPublisher()
+    
+    private lazy var _user: CurrentValueSubject<User?, Never> = .init(
+        auth.currentUser
     )
     
     private lazy var auth = Auth.auth()
@@ -40,7 +46,7 @@ extension AuthService: AuthServicing {
                 
                 print("-->", result.user)
                 
-                _isAuthenticated.send(true)
+                _user.send(result.user)
                 
                 promise(.success(()))
             }
@@ -63,7 +69,7 @@ extension AuthService: AuthServicing {
                 
                 print("-->", result.user)
                 
-                _isAuthenticated.send(true)
+                _user.send(result.user)
                 
                 promise(.success(()))
             }
@@ -75,7 +81,7 @@ extension AuthService: AuthServicing {
         Future { [unowned self] promise in
             do {
                 try auth.signOut()
-                _isAuthenticated.send(false)
+                _user.send(nil)
                 promise(.success(()))
             } catch {
                 promise(.failure(error))

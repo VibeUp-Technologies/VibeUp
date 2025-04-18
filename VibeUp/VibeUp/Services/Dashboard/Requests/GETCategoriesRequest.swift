@@ -2,7 +2,7 @@ import DashboardTypes
 
 struct GETCategoriesRequest: FirestoreRequest {
     
-    let path = "categories"
+    let collection = "categories"
 }
 
 extension DashboardCategory: FirestoreData {

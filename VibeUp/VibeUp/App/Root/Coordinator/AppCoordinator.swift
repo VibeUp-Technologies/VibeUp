@@ -41,7 +41,10 @@ private extension AppCoordinator {
                     isAuthenticated: authService.isAuthenticated
                 ),
                 services: .init(
-                    requestService: DasboardRequestService(firestoreService: firestoreService)
+                    requestService: DasboardRequestService(
+                        authService: authService,
+                        firestoreService: firestoreService
+                    )
                 )
             )
         )

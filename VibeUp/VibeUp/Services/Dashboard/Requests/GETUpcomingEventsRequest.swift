@@ -4,7 +4,7 @@ import DashboardTypes
 
 struct GETUpcomingEventsRequest: FirestoreRequest {
     
-    let path = "events"
+    let collection = "events"
 }
 
 extension DashboardUpcomingEvent: FirestoreData {
@@ -17,7 +17,8 @@ extension DashboardUpcomingEvent: FirestoreData {
             location: data["location"] as? String ?? "",
             name: data["name"] as? String ?? "",
             price: .init(data: data["price"] as? [String: Any] ?? [:]),
-            currencySymbol:  data["currencySymbol"] as? String ?? ""
+            currencySymbol:  data["currencySymbol"] as? String ?? "",
+            isFavorite: false
         )
     }
 }

@@ -54,7 +54,11 @@ private extension PopularEventCell {
                 action: viewModel.onFavorite,
                 label: {
                     Group {
-                        viewModel.isFavorite ? Resources.Image.bookmarkFill : Resources.Image.bookmark
+                        if viewModel.isLoading {
+                            ProgressView()
+                        } else {
+                            viewModel.isFavorite ? Resources.Image.bookmarkFill : Resources.Image.bookmark
+                        }
                     }
                     .font(.system(size: 18.0))
                     .foregroundStyle(Resources.Colors.sapphire)

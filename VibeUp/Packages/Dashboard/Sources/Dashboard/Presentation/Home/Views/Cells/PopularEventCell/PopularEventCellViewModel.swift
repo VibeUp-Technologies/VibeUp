@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 import DashboardTypes
 import Formatter
 
@@ -12,8 +13,13 @@ final class PopularEventCellViewModel: Identifiable, ObservableObject {
     let location: String
     let showDivider: Bool
     
+    @Published private(set) var isLoading = false
     @Published private(set) var isFavorite: Bool
     @Published private(set) var isBookmarkShown = false
+    
+    private let requestService: DashboardRequestServicing
+    
+    private var favoriteCancellable: AnyCancellable?
     
     init(dependency: Dependency) {
         id = dependency.input.event.id
@@ -21,9 +27,10 @@ final class PopularEventCellViewModel: Identifiable, ObservableObject {
         date = dependency.input.event.date.prettyFormatted(with: .format(.custom("dd MMM, HH:mm")))
         title = dependency.input.event.name
         price = Self.makePrice(for: dependency.input.event)
-        isFavorite = false
+        isFavorite = dependency.input.event.isFavorite
         location = dependency.input.event.location
         showDivider = dependency.input.showDivider
+        requestService = dependency.services.requestService
         
         dependency.input.isAuthenticated.assign(to: &$isBookmarkShown)
     }
@@ -32,7 +39,20 @@ final class PopularEventCellViewModel: Identifiable, ObservableObject {
 extension PopularEventCellViewModel {
     
     func onFavorite() {
-        isFavorite.toggle()
+        let request = isFavorite ? requestService.removeFromFavorites(id) : requestService.addToFavorites(id)
+        
+        isLoading = true
+        favoriteCancellable = request
+            .sink(
+                receiveCompletion: { _ in
+                    
+                },
+                receiveValue: { [unowned self] _ in
+                    isFavorite.toggle()
+                    
+                    isLoading = false
+                }
+            )
     }
 }
 

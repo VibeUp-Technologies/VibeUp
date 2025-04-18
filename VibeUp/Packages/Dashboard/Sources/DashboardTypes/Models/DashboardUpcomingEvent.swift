@@ -9,6 +9,7 @@ public struct DashboardUpcomingEvent {
     public let name: String
     public let price: Price
     public let currencySymbol: String
+    public let isFavorite: Bool
     
     public init(
         id: String,
@@ -17,7 +18,8 @@ public struct DashboardUpcomingEvent {
         location: String,
         name: String,
         price: Price,
-        currencySymbol: String
+        currencySymbol: String,
+        isFavorite: Bool
     ) {
         self.id = id
         self.date = date
@@ -26,6 +28,7 @@ public struct DashboardUpcomingEvent {
         self.name = name
         self.price = price
         self.currencySymbol = currencySymbol
+        self.isFavorite = isFavorite
     }
 }
 
@@ -43,6 +46,22 @@ public extension DashboardUpcomingEvent {
             self.from = from
             self.to = to
         }
+    }
+}
+
+public extension DashboardUpcomingEvent {
+    
+    func makeFavorte() -> Self {
+        .init(
+            id: id,
+            date: date,
+            image: image,
+            location: location,
+            name: name,
+            price: price,
+            currencySymbol: currencySymbol,
+            isFavorite: true
+        )
     }
 }
 
