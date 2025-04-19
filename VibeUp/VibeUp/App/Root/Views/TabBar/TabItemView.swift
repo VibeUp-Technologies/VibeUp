@@ -30,7 +30,7 @@ struct TabItemView: View {
                         .foregroundStyle(isSelected ? .white : Resources.Colors.mediumSlateBlue)
                     
                     if isSelected {
-                        SFProText(text: name, size: 14.0)
+                        SFProText(text: name, size: 12.0)
                     }
                 }
                 .background(
