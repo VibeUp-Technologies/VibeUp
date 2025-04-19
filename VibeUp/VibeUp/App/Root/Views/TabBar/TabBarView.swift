@@ -2,13 +2,14 @@ import SwiftUI
 import DesignSystem
 import Dashboard
 import Explore
+import Favorites
 
 struct TabBarView: View {
     
     enum Tab {
         case home(DashboardCoordinator)
         case explore(ExploreCoordinator)
-        case saved
+        case favorites(FavoritesCoordinator)
         case profile
     }
     
@@ -91,12 +92,12 @@ private extension TabBarView {
         @ViewBuilder
         static func makePageView(by tab: Tab) -> some View {
             switch tab {
-            case .home(let coordinator):
+            case let .home(coordinator):
                 DashboardCoordinatorView(coordinator: coordinator)
-            case .explore(let coordinator):
+            case let .explore(coordinator):
                 ExploreCoordinatorView(coordinator: coordinator)
-            case .saved:
-                Color.blue
+            case let .favorites(coordinator):
+                FavoritesCoordinatorView(coordinator: coordinator)
             case .profile:
                 Color.yellow
             }
@@ -119,7 +120,7 @@ private extension TabBarView {
                     name: "Explore",
                     action: action
                 )
-            case .saved:
+            case .favorites:
                 TabItemView(
                     isSelected: isSelected,
                     image: Resources.Image.heartFill,

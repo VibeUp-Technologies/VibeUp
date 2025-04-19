@@ -1,13 +1,18 @@
 import Foundation
 import FirebaseFirestore
-import DashboardTypes
+import FavoriteTypes
 
-struct GETUpcomingEventsRequest: FirestoreRequest {
+struct GETFavoriteEvents: FirestoreRequest {
     
     let collection = "events"
+    let filter: Filter?
+    
+    init(ids: [String]) {
+        filter = .whereField(FieldPath.documentID(), in: ids)
+    }
 }
 
-extension DashboardUpcomingEvent: FirestoreData {
+extension FavoriteEvent: FirestoreData {
     
     init?(id: String, data: [String: Any]) {
         self.init(
@@ -17,13 +22,12 @@ extension DashboardUpcomingEvent: FirestoreData {
             location: data["location"] as? String ?? "",
             name: data["name"] as? String ?? "",
             price: .init(data: data["price"] as? [String: Any] ?? [:]),
-            currencySymbol: data["currencySymbol"] as? String ?? "",
-            isFavorite: false
+            currencySymbol: data["currencySymbol"] as? String ?? ""
         )
     }
 }
 
-private extension DashboardUpcomingEvent.Price {
+private extension FavoriteEvent.Price {
     
     init(data: [String: Any]) {
         self.init(

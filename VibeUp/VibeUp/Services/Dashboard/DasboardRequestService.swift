@@ -3,14 +3,14 @@ import DashboardTypes
 
 final class DasboardRequestService {
     
-    private let authService: AuthServicing
+    private let authState: AuthStating
     private let firestoreService: FirestoreServicing
     
     init(
-        authService: AuthServicing,
+        authState: AuthStating,
         firestoreService: FirestoreServicing
     ) {
-        self.authService = authService
+        self.authState = authState
         self.firestoreService = firestoreService
     }
 }
@@ -26,11 +26,10 @@ extension DasboardRequestService: DashboardRequestServicing {
     func fetchUpcomingEvents() -> AnyPublisher<[DashboardUpcomingEvent], Error> {
         firestoreService.read(with: GETUpcomingEventsRequest())
             .flatMap { [unowned self] (events: [DashboardUpcomingEvent]) in
-                authService.user
-                    .compactMap { $0 }
+                authState.user
                     .map { user in
                         events.map { event in
-                            if user.favoriteEvents.contains(where: { $0 == event.id }) {
+                            if let user, user.favoriteEvents.contains(where: { $0 == event.id }) {
                                 event.makeFavorte()
                             } else {
                                 event
@@ -43,29 +42,43 @@ extension DasboardRequestService: DashboardRequestServicing {
     }
     
     func addToFavorites(_ eventID: String) -> AnyPublisher<Void, Error> {
-        authService.user
+        authState.user
             .compactMap { $0 }
-            .flatMap { [unowned self] in
+            .first()
+            .flatMap { [unowned self] user in
                 firestoreService.update(
                     with: PUTFavoriteEventRequest(
-                        userID: $0.id,
+                        userID: user.id,
                         eventID: eventID
                     )
                 )
+                .handleEvents(
+                    receiveOutput: { [unowned self] _ in
+                        authState.update(user.appendFavoriteEvent(eventID))
+                    }
+                )
+                .eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
     }
     
     func removeFromFavorites(_ eventID: String) -> AnyPublisher<Void, Error> {
-        authService.user
+        authState.user
             .compactMap { $0 }
-            .flatMap { [unowned self] in
+            .first()
+            .flatMap { [unowned self] user in
                 firestoreService.update(
                     with: DELETEFavoriteEventRequest(
-                        userID: $0.id,
+                        userID: user.id,
                         eventID: eventID
                     )
                 )
+                .handleEvents(
+                    receiveOutput: { [unowned self] _ in
+                        authState.update(user.removeFavoriteEvent(eventID))
+                    }
+                )
+                .eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
     }

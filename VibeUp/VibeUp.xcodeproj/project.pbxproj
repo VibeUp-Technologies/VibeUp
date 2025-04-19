@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1005C8752DB27A2D00BAFA83 /* BackdoorPanel in Frameworks */ = {isa = PBXBuildFile; productRef = 1005C8742DB27A2D00BAFA83 /* BackdoorPanel */; };
+		102D64802DB3EBCE007E0579 /* Favorites in Frameworks */ = {isa = PBXBuildFile; productRef = 102D647F2DB3EBCE007E0579 /* Favorites */; };
+		102D64822DB3F82C007E0579 /* FavoriteTypes in Frameworks */ = {isa = PBXBuildFile; productRef = 102D64812DB3F82C007E0579 /* FavoriteTypes */; };
 		1033FF7F2DB3D7CC0068E6C2 /* FlowStacks in Frameworks */ = {isa = PBXBuildFile; productRef = 1033FF7E2DB3D7CC0068E6C2 /* FlowStacks */; };
 		103ABD422DB0111A0073D19B /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 103ABD412DB0111A0073D19B /* FirebaseAnalytics */; };
 		103ABD442DB0111A0073D19B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 103ABD432DB0111A0073D19B /* FirebaseAuth */; };
@@ -27,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		1005C8732DB279E900BAFA83 /* BackdoorPanel */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = BackdoorPanel; sourceTree = "<group>"; };
+		102D647E2DB3EB3D007E0579 /* Favorites */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Favorites; sourceTree = "<group>"; };
 		103FD6212DB190A000750FEE /* Explore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Explore; sourceTree = "<group>"; };
 		1094CF9A2DAEB37A000233BF /* Formatter */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Formatter; sourceTree = "<group>"; };
 		1094CF9B2DAEB37A000233BF /* Logger */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Logger; sourceTree = "<group>"; };
@@ -56,12 +59,14 @@
 				10E014502DAD9785002B6CEC /* Dashboard in Frameworks */,
 				103ABD482DB0111A0073D19B /* FirebaseCrashlytics in Frameworks */,
 				103ABD422DB0111A0073D19B /* FirebaseAnalytics in Frameworks */,
+				102D64802DB3EBCE007E0579 /* Favorites in Frameworks */,
 				1005C8752DB27A2D00BAFA83 /* BackdoorPanel in Frameworks */,
 				103ABD5C2DB1367D0073D19B /* DashboardTypes in Frameworks */,
 				103FD6202DB15A2C00750FEE /* SDWebImageSwiftUI in Frameworks */,
 				103ABD4A2DB0111A0073D19B /* FirebaseFirestore in Frameworks */,
 				1033FF7F2DB3D7CC0068E6C2 /* FlowStacks in Frameworks */,
 				103FD6232DB190CE00750FEE /* Explore in Frameworks */,
+				102D64822DB3F82C007E0579 /* FavoriteTypes in Frameworks */,
 				10CD68C52DB287E400F32825 /* BackdoorPanelTypes in Frameworks */,
 				103ABD572DB128B80073D19B /* FirebaseDatabase in Frameworks */,
 				103ABD462DB0111A0073D19B /* FirebaseCore in Frameworks */,
@@ -78,6 +83,7 @@
 				10E014512DAD99C0002B6CEC /* DesignSystem */,
 				10E0144D2DAD9754002B6CEC /* Dashboard */,
 				103FD6212DB190A000750FEE /* Explore */,
+				102D647E2DB3EB3D007E0579 /* Favorites */,
 				1005C8732DB279E900BAFA83 /* BackdoorPanel */,
 			);
 			path = Packages;
@@ -154,6 +160,8 @@
 				1005C8742DB27A2D00BAFA83 /* BackdoorPanel */,
 				10CD68C42DB287E400F32825 /* BackdoorPanelTypes */,
 				1033FF7E2DB3D7CC0068E6C2 /* FlowStacks */,
+				102D647F2DB3EBCE007E0579 /* Favorites */,
+				102D64812DB3F82C007E0579 /* FavoriteTypes */,
 			);
 			productName = VibeUp;
 			productReference = 109CC89F2DAC24420009F041 /* VibeUp.app */;
@@ -463,6 +471,14 @@
 		1005C8742DB27A2D00BAFA83 /* BackdoorPanel */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = BackdoorPanel;
+		};
+		102D647F2DB3EBCE007E0579 /* Favorites */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Favorites;
+		};
+		102D64812DB3F82C007E0579 /* FavoriteTypes */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FavoriteTypes;
 		};
 		1033FF7E2DB3D7CC0068E6C2 /* FlowStacks */ = {
 			isa = XCSwiftPackageProductDependency;

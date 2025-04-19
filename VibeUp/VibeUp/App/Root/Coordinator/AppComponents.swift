@@ -3,5 +3,10 @@ import Foundation
 final class AppComponents {
     
     lazy var firestoreService = FirestoreService()
-    lazy var authService = AuthService(firestoreService: firestoreService)
+    
+    lazy var authState = AuthState()
+    lazy var authService = AuthService(
+        authState: authState,
+        firestoreService: firestoreService
+    )
 }

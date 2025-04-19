@@ -3,7 +3,7 @@ import Foundation
 struct VPUser {
     
     let id: String
-    let favoriteEvents: [String]
+    private(set) var favoriteEvents: [String]
     
     init(id: String) {
         self.id = id
@@ -16,5 +16,20 @@ struct VPUser {
     ) {
         self.id = id
         self.favoriteEvents = favoriteEvents
+    }
+}
+
+extension VPUser {
+    
+    func appendFavoriteEvent(_ id: String) -> Self {
+        var copy = self
+        copy.favoriteEvents.append(id)
+        return copy
+    }
+    
+    func removeFavoriteEvent(_ id: String) -> Self {
+        var copy = self
+        copy.favoriteEvents.removeAll(where: { $0 == id })
+        return copy
     }
 }

@@ -3,6 +3,7 @@ import FlowStacks
 import BackdoorPanel
 import Dashboard
 import Explore
+import Favorites
 
 final class AppCoordinator: ObservableObject {
     
@@ -38,7 +39,7 @@ private extension AppCoordinator {
         let tabs: [TabBarView.Tab] = [
             .home(makeDashboardCoordinator()),
             .explore(makeExploreCoordinator()),
-            .saved,
+            .favorites(makeFavoritesCoordinator()),
             .profile
         ]
         routes = [.root(.dashboard(tabs))]
@@ -48,11 +49,11 @@ private extension AppCoordinator {
         DashboardCoordinator(
             dependency: .init(
                 input: .init(
-                    isAuthenticated: appComponents.authService.isAuthenticated
+                    isAuthenticated: appComponents.authState.isAuthenticated
                 ),
                 services: .init(
                     requestService: DasboardRequestService(
-                        authService: appComponents.authService,
+                        authState: appComponents.authState,
                         firestoreService: appComponents.firestoreService
                     )
                 )
@@ -62,6 +63,19 @@ private extension AppCoordinator {
     
     func makeExploreCoordinator() -> ExploreCoordinator {
         ExploreCoordinator(dependency: .init(services: .init()))
+    }
+    
+    func makeFavoritesCoordinator() -> FavoritesCoordinator {
+        FavoritesCoordinator(
+            dependency: .init(
+                services: .init(
+                    requestSetvice: FavoritesRequestService(
+                        authState: appComponents.authState,
+                        firestoreService: appComponents.firestoreService
+                    )
+                )
+            )
+        )
     }
     
     func makeBackdoorCoordinates() -> BackdoorCoordinator {

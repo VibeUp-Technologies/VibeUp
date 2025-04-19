@@ -3,9 +3,6 @@ import FirebaseAuth
 
 protocol AuthServicing {
     
-    var user: AnyPublisher<VPUser?, Never> { get }
-    var isAuthenticated: AnyPublisher<Bool, Never> { get }
-    
     func setup()
     func signIn(email: String, password: String) -> AnyPublisher<Void, Error>
     func singUp(email: String, password: String) -> AnyPublisher<Void, Error>
@@ -14,23 +11,19 @@ protocol AuthServicing {
 
 final class AuthService {
     
-    lazy var user: AnyPublisher<VPUser?, Never> = _user
-        .eraseToAnyPublisher()
-    
-    lazy var isAuthenticated: AnyPublisher<Bool, Never> = _user
-        .map { $0 != nil }
-        .eraseToAnyPublisher()
-    
-    private lazy var _user: CurrentValueSubject<VPUser?, Never> = .init(nil)
-    
     private lazy var auth = Auth.auth()
     
+    private let authState: AuthStating
     private let firestoreService: FirestoreServicing
     
     private var stateChangeListener: NSObjectProtocol?
     private var fetchUserCancelable: AnyCancellable?
     
-    init(firestoreService: FirestoreServicing) {
+    init(
+        authState: AuthStating,
+        firestoreService: FirestoreServicing
+    ) {
+        self.authState = authState
         self.firestoreService = firestoreService
     }
 }
@@ -101,7 +94,7 @@ extension AuthService: AuthServicing {
         Future { [unowned self] promise in
             do {
                 try auth.signOut()
-                _user.send(nil)
+                authState.clear()
                 promise(.success(()))
             } catch {
                 promise(.failure(error))
@@ -119,7 +112,7 @@ private extension AuthService {
         firestoreService.create(with: POSTUserRequest(body: user))
             .handleEvents(
                 receiveOutput: { [unowned self] in
-                    _user.send(user)
+                    authState.update(user)
                 }
             )
             .eraseToAnyPublisher()
@@ -130,7 +123,7 @@ private extension AuthService {
             .compactMap { $0.first }
             .handleEvents(
                 receiveOutput: { [unowned self] in
-                    _user.send($0)
+                    authState.update($0)
                 }
             )
             .eraseToAnyPublisher()
