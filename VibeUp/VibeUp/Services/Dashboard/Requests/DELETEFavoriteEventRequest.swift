@@ -4,13 +4,16 @@ import DashboardTypes
 
 struct DELETEFavoriteEventRequest: FirestoreRequest {
     
-    let collection = "favorites"
+    let collection = "users"
     let document: String
     let body: [String : Any]
     
-    init(userId: String, eventId: String) {
-        self.document = userId
+    init(
+        userID: String,
+        eventID: String
+    ) {
+        self.document = userID
         
-        self.body = ["events": FieldValue.arrayRemove([eventId])]
+        self.body = ["favoriteEvents": FieldValue.arrayRemove([eventID])]
     }
 }

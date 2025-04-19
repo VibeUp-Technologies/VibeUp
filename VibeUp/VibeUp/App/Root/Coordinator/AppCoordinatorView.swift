@@ -22,6 +22,7 @@ struct AppCoordinatorView: View {
                 }
         }
         .overlay(alignment: .top) { backdoorView }
+        .onFirstAppear(coordinator.onFirstAppear)
     }
 }
 

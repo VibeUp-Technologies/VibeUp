@@ -5,11 +5,15 @@ struct VibeUpApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
     
-    private let coordinator = AppCoordinator()
+    private let appComponents = AppComponents()
     
     var body: some Scene {
         WindowGroup {
-            AppCoordinatorView(coordinator: coordinator)
+            AppCoordinatorView(
+                coordinator: AppCoordinator(
+                    appComponents: appComponents
+                )
+            )
         }
     }
 }

@@ -17,13 +17,20 @@ final class AppCoordinator: ObservableObject {
         ]
     }()
     
-    private let authService = AuthService()
-    private let firestoreService = FirestoreService()
+    private let appComponents: AppComponents
+    
+    init(appComponents: AppComponents) {
+        self.appComponents = appComponents
+    }
 }
 
 // MARK: - Actions
 
 extension AppCoordinator {
+    
+    func onFirstAppear() {
+        appComponents.authService.setup()
+    }
     
     func onBackdoor() {
         routes.presentSheet(.backdoor(makeBackdoorCoordinates()))
@@ -38,12 +45,12 @@ private extension AppCoordinator {
         DashboardCoordinator(
             dependency: .init(
                 input: .init(
-                    isAuthenticated: authService.isAuthenticated
+                    isAuthenticated: appComponents.authService.isAuthenticated
                 ),
                 services: .init(
                     requestService: DasboardRequestService(
-                        authService: authService,
-                        firestoreService: firestoreService
+                        authService: appComponents.authService,
+                        firestoreService: appComponents.firestoreService
                     )
                 )
             )
@@ -58,7 +65,9 @@ private extension AppCoordinator {
         BackdoorCoordinator(
             dependency: .init(
                 services: .init(
-                    authService: BackdoorAuthService(authService: authService)
+                    authService: BackdoorAuthService(
+                        authService: appComponents.authService
+                    )
                 )
             )
         )
