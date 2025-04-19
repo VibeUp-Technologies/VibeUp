@@ -1,6 +1,7 @@
 import Foundation
 import Combine
 import FirebaseFirestore
+import Logger
 
 protocol FirestoreServicing {
     
@@ -12,6 +13,12 @@ protocol FirestoreServicing {
 final class FirestoreService {
     
     private lazy var firestore = Firestore.firestore()
+    
+    private let logger: Logging?
+    
+    init(logger: Logging?) {
+        self.logger = logger
+    }
 }
 
 // MARK: - FirestoreServicing
@@ -20,9 +27,11 @@ extension FirestoreService: FirestoreServicing {
     
     func create(with request: FirestoreRequest) -> AnyPublisher<Void, Error> {
         Future { [unowned self] promise in
-            firestore.collection(request.collection).addDocument(data: request.body) { error in
+            let collection = firestore.collection(request.collection)
+            collection.addDocument(data: request.body) { [self] error in
                 if let error = error {
-                    print("💥 Fetching rrror: \(error)")
+                    log(error: "Create error: \(error)")
+                    promise(.failure(error))
                     return
                 }
                 
@@ -41,21 +50,26 @@ extension FirestoreService: FirestoreServicing {
                 query = collection.whereFilter(filter)
             }
             
-            query.getDocuments() { snapshot, error in
+            query.getDocuments() { [self] snapshot, error in
                 if let error = error {
-                    print("💥 Fetching rrror: \(error)")
+                    log(error: "Read error: \(error)")
+                    promise(.failure(error))
                     return
                 }
                 
                 guard let snapshot = snapshot else {
-                    print("💥 No snapshot returned")
+                    log(error: "No snapshot returned")
+                    promise(.failure(NSError(domain: "No snapshot returned", code: .zero)))
                     return
                 }
                 
-                print("--> Request", request)
-                print("--> Data", snapshot.documents.compactMap { $0.data() })
+                log(request: request, snapshot: snapshot)
                 
-                promise(.success(snapshot.documents.compactMap { .init(id: $0.documentID, data: $0.data()) }))
+                let result: [Data] = snapshot
+                    .documents
+                    .compactMap { .init(id: $0.documentID, data: $0.data()) }
+                
+                promise(.success(result))
             }
         }
         .eraseToAnyPublisher()
@@ -63,9 +77,11 @@ extension FirestoreService: FirestoreServicing {
     
     func update(with request: FirestoreRequest) -> AnyPublisher<Void, Error> {
         Future { [unowned self] promise in
-            firestore.collection(request.collection).document(request.document).updateData(request.body) { error in
+            let collection = firestore.collection(request.collection).document(request.document)
+            collection.updateData(request.body) { [self] error in
                 if let error = error {
-                    print("💥 Fetching rrror: \(error)")
+                    log(error: "Update error: \(error)")
+                    promise(.failure(error))
                     return
                 }
                 
@@ -73,5 +89,36 @@ extension FirestoreService: FirestoreServicing {
             }
         }
         .eraseToAnyPublisher()
+    }
+}
+
+// MARK: - Logging
+
+private extension FirestoreService {
+    
+    func log(request: FirestoreRequest, snapshot: QuerySnapshot) {
+        var message = "\n"
+        message += "🗂️ Collection: \(request.collection)"
+        message += "\n"
+        message += "📃 Document: \(request.document.isEmpty ? "Empty" : request.document)"
+        message += "\n"
+        
+        let data = snapshot.documents.map {
+            var dictionary: [String: Any] = [:]
+            dictionary["documentID"] = $0.documentID
+            dictionary.merge($0.data())
+            return dictionary
+        }
+        message += "📥 Response: \(data)"
+        
+        log(message: message)
+    }
+    
+    func log(error: String) {
+        log(message: "❌ Error: \(error)")
+    }
+    
+    func log(message: String) {
+        logger?.log(category: "FirestoreService", level: .debug, message: "\(message)")
     }
 }

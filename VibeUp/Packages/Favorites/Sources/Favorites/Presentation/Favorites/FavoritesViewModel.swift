@@ -18,7 +18,7 @@ final class FavoritesViewModel: ObservableObject {
 
 extension FavoritesViewModel {
     
-    func onAppear() {
+    func onFirstAppear() {
         fetchFavoritres()
     }
 }

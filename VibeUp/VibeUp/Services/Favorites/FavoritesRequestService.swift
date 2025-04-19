@@ -22,7 +22,6 @@ extension FavoritesRequestService: FavoritesRequestServicing {
     func fetchFavoriteEvents() -> AnyPublisher<[FavoriteEvent], Error> {
         authState.user
             .compactMap { $0?.favoriteEvents }
-            .first()
             .flatMap { [unowned self] in
                 firestoreService.read(with: GETFavoriteEvents(ids: $0))
             }

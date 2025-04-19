@@ -25,6 +25,6 @@ struct FavoritesView: View {
                 }
             )
         }
-        .onAppear(perform: viewModel.onAppear)
+        .onFirstAppear(viewModel.onFirstAppear)
     }
 }
