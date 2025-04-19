@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1005C8752DB27A2D00BAFA83 /* BackdoorPanel in Frameworks */ = {isa = PBXBuildFile; productRef = 1005C8742DB27A2D00BAFA83 /* BackdoorPanel */; };
-		103ABD3F2DB010B30073D19B /* FlowStacks in Frameworks */ = {isa = PBXBuildFile; productRef = 103ABD3E2DB010B30073D19B /* FlowStacks */; };
+		1033FF7F2DB3D7CC0068E6C2 /* FlowStacks in Frameworks */ = {isa = PBXBuildFile; productRef = 1033FF7E2DB3D7CC0068E6C2 /* FlowStacks */; };
 		103ABD422DB0111A0073D19B /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 103ABD412DB0111A0073D19B /* FirebaseAnalytics */; };
 		103ABD442DB0111A0073D19B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 103ABD432DB0111A0073D19B /* FirebaseAuth */; };
 		103ABD462DB0111A0073D19B /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 103ABD452DB0111A0073D19B /* FirebaseCore */; };
@@ -60,11 +60,11 @@
 				103ABD5C2DB1367D0073D19B /* DashboardTypes in Frameworks */,
 				103FD6202DB15A2C00750FEE /* SDWebImageSwiftUI in Frameworks */,
 				103ABD4A2DB0111A0073D19B /* FirebaseFirestore in Frameworks */,
+				1033FF7F2DB3D7CC0068E6C2 /* FlowStacks in Frameworks */,
 				103FD6232DB190CE00750FEE /* Explore in Frameworks */,
 				10CD68C52DB287E400F32825 /* BackdoorPanelTypes in Frameworks */,
 				103ABD572DB128B80073D19B /* FirebaseDatabase in Frameworks */,
 				103ABD462DB0111A0073D19B /* FirebaseCore in Frameworks */,
-				103ABD3F2DB010B30073D19B /* FlowStacks in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,7 +140,6 @@
 			packageProductDependencies = (
 				10E0144F2DAD9785002B6CEC /* Dashboard */,
 				1094D02A2DAEF3BD000233BF /* DesignSystem */,
-				103ABD3E2DB010B30073D19B /* FlowStacks */,
 				103ABD412DB0111A0073D19B /* FirebaseAnalytics */,
 				103ABD432DB0111A0073D19B /* FirebaseAuth */,
 				103ABD452DB0111A0073D19B /* FirebaseCore */,
@@ -154,6 +153,7 @@
 				103FD6222DB190CE00750FEE /* Explore */,
 				1005C8742DB27A2D00BAFA83 /* BackdoorPanel */,
 				10CD68C42DB287E400F32825 /* BackdoorPanelTypes */,
+				1033FF7E2DB3D7CC0068E6C2 /* FlowStacks */,
 			);
 			productName = VibeUp;
 			productReference = 109CC89F2DAC24420009F041 /* VibeUp.app */;
@@ -184,9 +184,9 @@
 			mainGroup = 109CC8962DAC24420009F041;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				103ABD3D2DB010B30073D19B /* XCRemoteSwiftPackageReference "FlowStacks" */,
 				103ABD402DB0111A0073D19B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				103FD61E2DB15A2C00750FEE /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				1033FF7D2DB3D7CC0068E6C2 /* XCRemoteSwiftPackageReference "FlowStacks" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 109CC8A02DAC24420009F041 /* Products */;
@@ -433,12 +433,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		103ABD3D2DB010B30073D19B /* XCRemoteSwiftPackageReference "FlowStacks" */ = {
+		1033FF7D2DB3D7CC0068E6C2 /* XCRemoteSwiftPackageReference "FlowStacks" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/johnpatrickmorgan/FlowStacks.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.8.3;
+				kind = exactVersion;
+				version = 0.4.1;
 			};
 		};
 		103ABD402DB0111A0073D19B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -464,9 +464,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = BackdoorPanel;
 		};
-		103ABD3E2DB010B30073D19B /* FlowStacks */ = {
+		1033FF7E2DB3D7CC0068E6C2 /* FlowStacks */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 103ABD3D2DB010B30073D19B /* XCRemoteSwiftPackageReference "FlowStacks" */;
+			package = 1033FF7D2DB3D7CC0068E6C2 /* XCRemoteSwiftPackageReference "FlowStacks" */;
 			productName = FlowStacks;
 		};
 		103ABD412DB0111A0073D19B /* FirebaseAnalytics */ = {

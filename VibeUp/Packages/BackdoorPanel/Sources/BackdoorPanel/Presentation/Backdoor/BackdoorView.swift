@@ -3,25 +3,17 @@ import DesignSystem
 
 struct BackdoorView: View {
     
-    private let signInViewModel: SignInViewModel
-    private let signUpViewModel: SignUpViewModel
-    private let logOutViewModel: LogOutViewModel
+    private let viewModel: BackdoorViewModel
     
-    init(
-        signInViewModel: SignInViewModel,
-        signUpViewModel: SignUpViewModel,
-        logOutViewModel: LogOutViewModel
-    ) {
-        self.signInViewModel = signInViewModel
-        self.signUpViewModel = signUpViewModel
-        self.logOutViewModel = logOutViewModel
+    init(viewModel: BackdoorViewModel) {
+        self.viewModel = viewModel
     }
     
     var body: some View {
         ScrollView {
-            SignInView(viewModel: signInViewModel)
-            SignUpView(viewModel: signUpViewModel)
-            LogOutView(viewModel: logOutViewModel)
+            SignInView(viewModel: viewModel.signInViewModel)
+            SignUpView(viewModel: viewModel.signUpViewModel)
+            LogOutView(viewModel: viewModel.logOutViewModel)
         }
         .navigationBar(configuration: .init())
     }

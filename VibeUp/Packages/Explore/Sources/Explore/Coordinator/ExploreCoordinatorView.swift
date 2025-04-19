@@ -12,8 +12,11 @@ public struct ExploreCoordinatorView: View {
     }
     
     public var body: some View {
-        FlowStack($coordinator.routes) {
-            MapView()
+        Router($coordinator.routes) { screen in
+            switch screen {
+            case .map:
+                MapView()
+            }
         }
     }
 }

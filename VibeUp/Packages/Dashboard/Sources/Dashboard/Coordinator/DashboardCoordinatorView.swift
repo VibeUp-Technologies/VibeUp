@@ -12,22 +12,13 @@ public struct DashboardCoordinatorView: View {
     }
     
     public var body: some View {
-        FlowStack($coordinator.routes, withNavigation: true) {
-            HomeView(viewModel: coordinator.makeHomeViewModel())
-                .flowDestination(for: Screen.self) { screen in
-                    switch screen {
-                    case .category:
-                        Color.red
-                            .navigationBar(
-                                configuration: .init(
-                                    leadingItems: [
-                                        BackNavigationBarItemButton(action: { coordinator.routes.pop() })
-                                    ],
-                                    isBackgroundHidden: false
-                                )
-                            )
-                    }
-                }
+        Router($coordinator.routes) { screen in
+            switch screen {
+            case let .home(viewModel):
+                HomeView(viewModel: viewModel)
+            case .category:
+                Color.red
+            }
         }
     }
 }

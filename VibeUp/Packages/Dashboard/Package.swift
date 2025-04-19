@@ -24,7 +24,7 @@ let package = Package(
         .package(path: "Formatter"),
         .package(
             url: "https://github.com/johnpatrickmorgan/FlowStacks.git",
-            .upToNextMajor(from: "0.8.3")
+            from: "0.4.1"
         ),
         .package(
             url: "https://github.com/liamnichols/xcstrings-tool-plugin.git",

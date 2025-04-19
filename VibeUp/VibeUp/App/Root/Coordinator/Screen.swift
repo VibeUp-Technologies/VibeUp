@@ -1,6 +1,7 @@
 import Foundation
 import BackdoorPanel
 
-enum Screen: Hashable {
+enum Screen {
+    case dashboard([TabBarView.Tab])
     case backdoor(BackdoorCoordinator)
 }

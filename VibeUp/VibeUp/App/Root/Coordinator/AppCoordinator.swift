@@ -8,19 +8,12 @@ final class AppCoordinator: ObservableObject {
     
     @Published var routes: [Route<Screen>] = []
     
-    lazy var tabs: [TabBarView.Tab] = {
-        [
-            .home(makeDashboardCoordinator()),
-            .explore(makeExploreCoordinator()),
-            .saved,
-            .profile
-        ]
-    }()
-    
     private let appComponents: AppComponents
     
     init(appComponents: AppComponents) {
         self.appComponents = appComponents
+        
+        setupRoot()
     }
 }
 
@@ -40,6 +33,16 @@ extension AppCoordinator {
 // MARK: - Private
 
 private extension AppCoordinator {
+    
+    func setupRoot() {
+        let tabs: [TabBarView.Tab] = [
+            .home(makeDashboardCoordinator()),
+            .explore(makeExploreCoordinator()),
+            .saved,
+            .profile
+        ]
+        routes = [.root(.dashboard(tabs))]
+    }
     
     func makeDashboardCoordinator() -> DashboardCoordinator {
         DashboardCoordinator(

@@ -18,7 +18,7 @@ let package = Package(
         .package(path: "DesignSystem"),
         .package(
             url: "https://github.com/johnpatrickmorgan/FlowStacks.git",
-            .upToNextMajor(from: "0.8.3")
+            from: "0.4.1"
         )
     ],
     targets: [

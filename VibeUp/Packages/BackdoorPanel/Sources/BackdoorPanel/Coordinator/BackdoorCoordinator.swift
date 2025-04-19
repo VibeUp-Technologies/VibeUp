@@ -9,37 +9,18 @@ public final class BackdoorCoordinator: ObservableObject {
     
     public init(dependency: Dependency) {
         self.dependency = dependency
+        
+        setupRoot()
     }
 }
 
-extension BackdoorCoordinator {
+private extension BackdoorCoordinator {
     
-    func makeSignInViewModel() -> SignInViewModel {
-        SignInViewModel(authService: dependency.services.authService)
+    func setupRoot() {
+        routes = [.root(.backdoor(makeBackdoorViewModel()))]
     }
     
-    func makeSignUpViewModel() -> SignUpViewModel {
-        SignUpViewModel(authService: dependency.services.authService)
-    }
-    
-    func makeLogOutViewModel() -> LogOutViewModel {
-        LogOutViewModel(authService: dependency.services.authService)
-    }
-}
-
-// TODO: - Move to FlowStacks
-
-extension BackdoorCoordinator: Identifiable, Hashable {
-    
-    var identifier: String {
-        UUID().uuidString
-    }
-    
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(identifier)
-    }
-    
-    public static func == (lhs: BackdoorCoordinator, rhs: BackdoorCoordinator) -> Bool {
-        lhs.identifier == rhs.identifier
+    func makeBackdoorViewModel() -> BackdoorViewModel {
+        BackdoorViewModel(authService: dependency.services.authService)
     }
 }

@@ -12,14 +12,15 @@ struct AppCoordinatorView: View {
     }
     
     var body: some View {
-        FlowStack($coordinator.routes, withNavigation: true) {
-            TabBarView(tabs: coordinator.tabs)
-                .flowDestination(for: Screen.self) { screen in
-                    switch screen {
-                    case let .backdoor(coordinator):
-                        BackdoorCoordinatorView(coordinator: coordinator)
-                    }
+        NavigationView {
+            Router($coordinator.routes) { screen in
+                switch screen {
+                case let .dashboard(tabs):
+                    TabBarView(tabs: tabs)
+                case let .backdoor(coordinator):
+                    BackdoorCoordinatorView(coordinator: coordinator)
                 }
+            }
         }
         .overlay(alignment: .top) { backdoorView }
         .onFirstAppear(coordinator.onFirstAppear)

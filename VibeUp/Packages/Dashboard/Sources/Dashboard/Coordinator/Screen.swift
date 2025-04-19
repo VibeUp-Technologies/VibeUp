@@ -1,5 +1,6 @@
 import DashboardTypes
 
-enum Screen: Hashable {
+enum Screen {
+    case home(HomeViewModel)
     case category
 }

@@ -12,12 +12,11 @@ public struct BackdoorCoordinatorView: View {
     }
     
     public var body: some View {
-        FlowStack($coordinator.routes, withNavigation: true) {
-            BackdoorView(
-                signInViewModel: coordinator.makeSignInViewModel(),
-                signUpViewModel: coordinator.makeSignUpViewModel(),
-                logOutViewModel: coordinator.makeLogOutViewModel()
-            )
+        Router($coordinator.routes) { screen in
+            switch screen {
+            case let .backdoor(viewModel):
+                BackdoorView(viewModel: viewModel)
+            }
         }
     }
 }

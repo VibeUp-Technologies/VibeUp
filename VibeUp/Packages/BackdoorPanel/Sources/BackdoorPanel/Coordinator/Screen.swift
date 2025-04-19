@@ -1,5 +1,5 @@
 import Foundation
 
-enum Screen: Hashable {
-    
+enum Screen {
+    case backdoor(BackdoorViewModel)
 }

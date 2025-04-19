@@ -9,10 +9,18 @@ public final class DashboardCoordinator: ObservableObject {
     
     public init(dependency: Dependency) {
         self.dependency = dependency
+        
+        setupRoot()
     }
 }
 
-extension DashboardCoordinator {
+// MARK: - Private
+
+private extension DashboardCoordinator {
+    
+    func setupRoot() {
+        routes = [.root(.home(makeHomeViewModel()))]
+    }
     
     func makeHomeViewModel() -> HomeViewModel {
         HomeViewModel(

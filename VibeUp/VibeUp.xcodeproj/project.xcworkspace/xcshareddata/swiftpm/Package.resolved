@@ -1,5 +1,5 @@
 {
-  "originHash" : "525423268e3b163b9b6293333dee5cf9ee9adf8aabfa7e1e1d387950a24f2d66",
+  "originHash" : "8d5bc89ea0635f71bb2eab52e6cbbc12d6369635aa46bd72077f7e21e0bf24fb",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -33,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/johnpatrickmorgan/FlowStacks.git",
       "state" : {
-        "revision" : "0c2d1dcabcaf1a6b725f4a9d01796308d9b03db1",
-        "version" : "0.8.3"
+        "revision" : "a2b974b81612e1e8ee3ecd757d936a2919527356",
+        "version" : "0.4.1"
       }
     },
     {
