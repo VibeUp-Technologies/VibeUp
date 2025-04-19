@@ -71,7 +71,19 @@ private extension HomeViewModel {
                     
                 },
                 receiveValue: { [unowned self] events in
-                    upcomingEventViewModels = events.map(UpcomingEventCellViewModel.init)
+                    upcomingEventViewModels = events.enumerated().map { index, event in
+                        UpcomingEventCellViewModel(
+                            dependency: .init(
+                                input: .init(
+                                    isAuthenticated: dependency.input.isAuthenticated,
+                                    event: event
+                                ),
+                                services: .init(
+                                    requestService: dependency.services.requestService
+                                )
+                            )
+                        )
+                    }
                     
                     popularEventViewModels = events.enumerated().map { index, event in
                         PopularEventCellViewModel(

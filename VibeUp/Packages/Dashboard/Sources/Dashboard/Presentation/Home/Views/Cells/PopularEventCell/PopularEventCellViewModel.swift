@@ -36,6 +36,8 @@ final class PopularEventCellViewModel: Identifiable, ObservableObject {
     }
 }
 
+// MARK: - Actions
+
 extension PopularEventCellViewModel {
     
     func onFavorite() {
