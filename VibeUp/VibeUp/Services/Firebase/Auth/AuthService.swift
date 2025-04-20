@@ -1,5 +1,6 @@
 import Combine
 import FirebaseAuth
+import Logger
 
 protocol AuthServicing {
     
@@ -13,6 +14,7 @@ final class AuthService {
     
     private lazy var auth = Auth.auth()
     
+    private let logger: Logging?
     private let authState: AuthStating
     private let firestoreService: FirestoreServicing
     
@@ -20,9 +22,11 @@ final class AuthService {
     private var fetchUserCancelable: AnyCancellable?
     
     init(
+        logger: Logging?,
         authState: AuthStating,
         firestoreService: FirestoreServicing
     ) {
+        self.logger = logger
         self.authState = authState
         self.firestoreService = firestoreService
     }
@@ -38,45 +42,51 @@ extension AuthService: AuthServicing {
             
             fetchUserCancelable = fetchUser(by: user.uid)
                 .sink(
-                    receiveCompletion: { _ in },
-                    receiveValue: { _ in }
+                    receiveCompletion: { [self] compition in
+                        guard case .failure(let error) = compition else { return }
+                        
+                        log(error: "Fetch user error: \(error)")
+                    },
+                    receiveValue: { [self] in
+                        authState.update($0)
+                    }
                 )
         }
     }
     
     func signIn(email: String, password: String) -> AnyPublisher<Void, Error> {
         Future { [unowned self] promise in
-            auth.signIn(withEmail: email, password: password) { result, error in
+            auth.signIn(withEmail: email, password: password) { [self] result, error in
                 if let error {
-                    print("💥 Error: \(error)")
+                    log(error: "SignIn error: \(error)")
+                    promise(.failure(error))
                     return
                 }
                 
                 guard let result else {
-                    print("💥 No snapshot returned")
+                    log(error: "No user result")
+                    promise(.failure(NSError(domain: "No user result", code: .zero)))
                     return
                 }
                 
-                promise(.success(result.user))
+                promise(.success(()))
             }
         }
-        .flatMap { [unowned self] (user: User) in
-            fetchUser(by: user.uid)
-        }
-        .map { _ in }
         .eraseToAnyPublisher()
     }
     
     func singUp(email: String, password: String) -> AnyPublisher<Void, Error> {
         Future { [unowned self] promise in
-            auth.createUser(withEmail: email, password: password) { result, error in
+            auth.createUser(withEmail: email, password: password) { [self] result, error in
                 if let error {
-                    print("💥 Error: \(error)")
+                    log(error: "Create user error: \(error)")
+                    promise(.failure(error))
                     return
                 }
                 
                 guard let result else {
-                    print("💥 No snapshot returned")
+                    log(error: "No user result")
+                    promise(.failure(NSError(domain: "No user result", code: .zero)))
                     return
                 }
                 
@@ -121,11 +131,23 @@ private extension AuthService {
     func fetchUser(by id: String) -> AnyPublisher<VPUser, Error> {
         firestoreService.read(with: GETUserRequest(userID: id))
             .compactMap { $0.first }
-            .handleEvents(
-                receiveOutput: { [unowned self] in
-                    authState.update($0)
-                }
-            )
             .eraseToAnyPublisher()
+    }
+}
+
+// MARK: - Logging
+
+private extension AuthService {
+    
+    func log(error: String) {
+        log(message: "❌ Error: \(error)")
+    }
+    
+    func log(message: String) {
+        logger?.log(
+            category: "AuthService",
+            level: .debug,
+            message: "🚹 Auth: \(message)"
+        )
     }
 }

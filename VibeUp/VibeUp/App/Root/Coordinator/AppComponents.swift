@@ -11,6 +11,7 @@ final class AppComponents {
     
     lazy var authState = AuthState()
     lazy var authService = AuthService(
+        logger: logger,
         authState: authState,
         firestoreService: firestoreService
     )
