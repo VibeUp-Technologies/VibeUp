@@ -23,6 +23,9 @@ private extension FavoritesCoordinator {
     func makeFavoriteViewModel() -> FavoritesViewModel {
         FavoritesViewModel(
             dependency: .init(
+                input: .init(
+                    isAuthenticated: dependency.input.isAuthenticated
+                ),
                 services: .init(
                     requestSetvice: dependency.services.requestSetvice
                 )

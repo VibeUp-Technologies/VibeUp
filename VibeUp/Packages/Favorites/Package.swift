@@ -23,6 +23,10 @@ let package = Package(
         .package(
             url: "https://github.com/johnpatrickmorgan/FlowStacks.git",
             from: "0.4.1"
+        ),
+        .package(
+            url: "https://github.com/liamnichols/xcstrings-tool-plugin.git",
+            from: "1.1.0"
         )
     ],
     targets: [
@@ -31,10 +35,13 @@ let package = Package(
             dependencies: [
                 "FavoriteTypes",
                 "DesignSystem",
-                "FlowStacks"
+                "FlowStacks",
+                .product(name: "XCStringsToolPlugin", package: "xcstrings-tool-plugin")
+            ],
+            resources: [
+                .process("Resources")
             ]
-        )
-        ,
+        ),
         .target(
             name: "FavoriteTypes",
             dependencies: []

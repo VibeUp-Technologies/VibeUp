@@ -1,8 +1,7 @@
-import Foundation
 import Combine
 import FavoriteTypes
 
-extension FavoritesViewModel {
+extension FavoriteEventCellViewModel {
     
     struct Dependency {
         
@@ -12,11 +11,12 @@ extension FavoritesViewModel {
     
     struct Input {
         
-        let isAuthenticated: AnyPublisher<Bool, Never>
+        let event: FavoriteEvent
+        let showDivider: Bool
     }
     
     struct Services {
         
-        let requestSetvice: FavoritesRequestServicing
+        let requestService: FavoritesRequestServicing
     }
 }

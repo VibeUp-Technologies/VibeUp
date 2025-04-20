@@ -68,6 +68,9 @@ private extension AppCoordinator {
     func makeFavoritesCoordinator() -> FavoritesCoordinator {
         FavoritesCoordinator(
             dependency: .init(
+                input: .init(
+                    isAuthenticated: appComponents.authState.isAuthenticated
+                ),
                 services: .init(
                     requestSetvice: FavoritesRequestService(
                         authState: appComponents.authState,

@@ -23,7 +23,7 @@ public struct SectionView<Content: View>: View {
     public init(
         title: String,
         trailingContent: TrailingContent? = nil,
-        content: @escaping () -> Content
+        @ViewBuilder content: @escaping () -> Content
     ) {
         self.title = title
         self.trailingContent = trailingContent

@@ -1,12 +1,12 @@
 import SwiftUI
 import DesignSystem
 
-struct PopularEventCell: View {
+struct FavoriteEventCell: View {
     
     @ObservedObject
-    private var viewModel: PopularEventCellViewModel
+    private var viewModel: FavoriteEventCellViewModel
     
-    init(viewModel: PopularEventCellViewModel) {
+    init(viewModel: FavoriteEventCellViewModel) {
         self.viewModel = viewModel
     }
     
@@ -18,8 +18,8 @@ struct PopularEventCell: View {
             location: viewModel.location,
             price: viewModel.price,
             showDivider: viewModel.showDivider,
-            isBookmarkShown: viewModel.isBookmarkShown,
-            isFavorite: viewModel.isFavorite,
+            isBookmarkShown: true,
+            isFavorite: true,
             isLoading: viewModel.isLoading,
             onFavorite: viewModel.onFavorite
         )
