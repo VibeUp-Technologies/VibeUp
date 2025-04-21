@@ -24,6 +24,7 @@ extension AppCoordinator {
     
     func onFirstAppear() {
         appComponents.authService.setup()
+        appComponents.locationService.setup()
     }
     
     func onBackdoor() {
@@ -62,7 +63,13 @@ private extension AppCoordinator {
     }
     
     func makeExploreCoordinator() -> ExploreCoordinator {
-        ExploreCoordinator(dependency: .init(services: .init()))
+        ExploreCoordinator(
+            dependency: .init(
+                input: .init(
+                    currentLocation: appComponents.locationState.currentLocation
+                )
+            )
+        )
     }
     
     func makeFavoritesCoordinator() -> FavoritesCoordinator {

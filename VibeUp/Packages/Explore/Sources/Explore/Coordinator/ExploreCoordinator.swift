@@ -14,9 +14,21 @@ public final class ExploreCoordinator: ObservableObject {
     }
 }
 
+// MARK: - Private
+
 private extension ExploreCoordinator {
     
     func setupRoot() {
-        routes = [.root(.map)]
+        routes = [.root(.map(makeMapViewModel()))]
+    }
+    
+    func makeMapViewModel() -> MapViewModel {
+        MapViewModel(
+            dependency: .init(
+                input: .init(
+                    currentLocation: dependency.input.currentLocation
+                )
+            )
+        )
     }
 }

@@ -14,8 +14,8 @@ public struct ExploreCoordinatorView: View {
     public var body: some View {
         Router($coordinator.routes) { screen in
             switch screen {
-            case .map:
-                MapView()
+            case let .map(viewModel):
+                MapView(viewModel: viewModel)
             }
         }
     }

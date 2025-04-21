@@ -1,5 +1,5 @@
 import Foundation
 
 enum Screen {
-    case map
+    case map(MapViewModel)
 }

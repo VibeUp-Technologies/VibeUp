@@ -1,40 +1,60 @@
 import SwiftUI
 import MapKit
 import DesignSystem
+import ExploreTypes // TODO: - Remove
 
 struct MapView: View {
     
-    struct Place: Identifiable {
-        let id = UUID()
-        let name: String
-        let coordinate: CLLocationCoordinate2D
+    @ObservedObject
+    private var viewModel: MapViewModel
+    
+    init(viewModel: MapViewModel) {
+        self.viewModel = viewModel
     }
     
-    @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 34.0522, longitude: -118.2437), // Los Angeles!
-        span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-    )
-    
-    let places = [
-        Place(name: "Griffith Observatory", coordinate: CLLocationCoordinate2D(latitude: 34.1184, longitude: -118.3004)),
-        Place(name: "Santa Monica Pier", coordinate: CLLocationCoordinate2D(latitude: 34.0094, longitude: -118.4973))
-    ]
-    
     var body: some View {
-        Map(coordinateRegion: $region, annotationItems: places) { place in
-            MapAnnotation(coordinate: place.coordinate) {
-                VStack {
-                    Image(systemName: "mappin.circle.fill")
-                        .font(.title)
-                        .foregroundColor(.blue)
-                    Text(place.name)
-                        .font(.caption)
-                        .padding(4)
-                        .background(.ultraThinMaterial)
-                        .cornerRadius(6)
-                }
+        Group {
+            switch viewModel.state {
+            case .loading:
+                ProgressView()
+            case .loaded(let locations):
+                makeMapView(locations)
             }
         }
-        .navigationBar(configuration: .init(isHidden: true))
+        .onFirstAppear(viewModel.onFirstAppear)
+    }
+}
+
+// MARK: - Private
+
+private extension MapView {
+    
+    func makeMapView(_ locations: [MapLocation]) -> some View {
+        Map(coordinateRegion: $viewModel.region, annotationItems: locations) { location in
+            MapAnnotation(
+                coordinate: CLLocationCoordinate2D(
+                    latitude: location.latitude,
+                    longitude: location.longitude
+                ),
+                content: {
+                    Image(systemName: "pin.circle.fill").foregroundColor(.red)
+                    Text(location.name)
+                }
+            )
+        }
+        .overlay(alignment: .bottom, content: { eventListView })
+    }
+    
+    var eventListView: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack(spacing: Spacing.padding_2) {
+                ForEach(0..<5) { _ in
+                    Color.red.frame(width: 280.0)
+                }
+            }
+            .padding(.horizontal, Spacing.padding_2)
+        }
+        .frame(height: 220.0)
+        .padding(.bottom, Spacing.padding_6)
     }
 }

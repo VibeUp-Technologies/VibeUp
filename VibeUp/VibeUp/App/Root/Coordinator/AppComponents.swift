@@ -15,4 +15,10 @@ final class AppComponents {
         authState: authState,
         firestoreService: firestoreService
     )
+    
+    lazy var locationState = LocationState()
+    lazy var locationService = LocationService(
+        logger: logger,
+        locationState: locationState
+    )
 }

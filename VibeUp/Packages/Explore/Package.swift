@@ -12,6 +12,10 @@ let package = Package(
         .library(
             name: "Explore",
             targets: ["Explore"]
+        ),
+        .library(
+            name: "ExploreTypes",
+            targets: ["Explore"]
         )
     ],
     dependencies: [
@@ -25,9 +29,14 @@ let package = Package(
         .target(
             name: "Explore",
             dependencies: [
+                "ExploreTypes",
                 "DesignSystem",
                 "FlowStacks"
             ]
+        ),
+        .target(
+            name: "ExploreTypes",
+            dependencies: []
         )
     ]
 )

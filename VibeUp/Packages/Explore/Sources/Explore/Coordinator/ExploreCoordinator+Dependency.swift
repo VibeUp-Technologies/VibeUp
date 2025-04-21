@@ -1,18 +1,25 @@
 import Foundation
+import Combine
+import ExploreTypes
+import CoreLocation
 
 public extension ExploreCoordinator {
     
     struct Dependency {
         
-        let services: Services
+        let input: Input
         
-        public init(services: Services) {
-            self.services = services
+        public init(input: Input) {
+            self.input = input
         }
     }
     
-    struct Services {
+    struct Input {
         
-        public init() { }
+        let currentLocation: AnyPublisher<CLLocation?, Never>
+        
+        public init(currentLocation: AnyPublisher<CLLocation?, Never>) {
+            self.currentLocation = currentLocation
+        }
     }
 }

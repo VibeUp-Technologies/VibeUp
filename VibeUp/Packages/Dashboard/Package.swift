@@ -17,7 +17,7 @@ let package = Package(
         .library(
             name: "DashboardTypes",
             targets: ["Dashboard"]
-        ),
+        )
     ],
     dependencies: [
         .package(path: "DesignSystem"),
